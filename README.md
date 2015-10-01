@@ -5,6 +5,6 @@
 
 (+)对于Storyboard 一些理解
 
-(+)封装一些基础库如 BMP，Alert，SDImage 等等，在日后会增加跟多。
+(+)封装一些基础库如 BMP，Alert，SDImage 等等，在日后会增加更多。
 
 (+)还有对OC黑技术的封装，也是一种总结吧。
