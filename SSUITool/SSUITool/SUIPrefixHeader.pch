@@ -1,0 +1,26 @@
+//
+//  SUIPrefixHeader.pch
+//  SUITool
+//
+//  Created by Suger on 15/8/27.
+//  Copyright (c) 2015年 NewLandPay. All rights reserved.
+//
+
+#ifndef SUITool_SUIPrefixHeader_pch
+#define SUITool_SUIPrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+#import "SMacro.h"
+#import "SPropertyMacro.h"
+#import <SToolPage/SToolPage.h>
+
+#import "UIViewController+Base.h"
+#import "AppDelegate+Resource.h"
+
+
+#import "SXibLoadHandler.h"
+#import "SXResLoadHandler.h"
+#import "SXHttpLoadManager.h"
+
+#endif
