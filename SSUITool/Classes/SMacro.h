@@ -11,7 +11,7 @@
 
 
 
-
+/*
 #ifndef dispatch_main_sync_safe
 #define dispatch_main_sync_safe(block)\
 if ([NSThread isMainThread]) {\
@@ -28,7 +28,7 @@ block();\
 } else {\
 dispatch_async(dispatch_get_main_queue(), block);\
 }
-#endif
+#endif*/
 
 
 //判断是否是 release 版本， 如果是release 版本则宏定义为 1 ,反则为 0

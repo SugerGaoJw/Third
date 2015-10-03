@@ -13,17 +13,19 @@
 
 
 #pragma mark - SXHttpLoadDelegate
-- (id<NSCopying>)createWithURL:(NSURL *)url BodyParams:(id<NSCopying>)bodyParams {
+- (id<NSCopying>)createWithURL:(NSURL *)url BodyParams:(NSDictionary *)bodyParams {
     ASIFormDataRequest* req = [ASIFormDataRequest requestWithURL:url];
     //主要是对 bodyParams 参数进行赋值
     //并且设置 delegate 和 方法
     
     //set req body
-    id obj = bodyParams;
-    if (url == nil || bodyParams == nil || ![obj isKindOfClass:[NSDictionary class]]) {
+    if (![NSObject isEqualSrcObject:(id)url EnqualClass:[NSURL class]]
+        ||![NSObject isEqualSrcObject:(id)bodyParams EnqualClass:[NSDictionary class]]) {
         SLog(@"url or bodyParams is nil ");
         return nil;
     }
+
+    
     NSString* json = [ASIJSONTool toJSONString:bodyParams];
     if (json == nil) {
         SLog(@"toJSONString is failed");

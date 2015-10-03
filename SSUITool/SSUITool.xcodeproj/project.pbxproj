@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9B867C031BBF463700D41C93 /* SXMutliDoLoadRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B867C021BBF463700D41C93 /* SXMutliDoLoadRequest.m */; settings = {ASSET_TAGS = (); }; };
+		9B867C061BBF502100D41C93 /* NSObject+Equal.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B867C051BBF502100D41C93 /* NSObject+Equal.m */; settings = {ASSET_TAGS = (); }; };
 		9B86BD751BBBF80D008D22DD /* SToolPage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B86BD741BBBF80D008D22DD /* SToolPage.framework */; settings = {ASSET_TAGS = (); }; };
 		9B86BD781BBC050C008D22DD /* SXGETRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B86BD771BBC050C008D22DD /* SXGETRequest.m */; settings = {ASSET_TAGS = (); }; };
 		9BA809301BBD207100037E3C /* TestNetMovieEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA8092F1BBD207100037E3C /* TestNetMovieEntity.m */; settings = {ASSET_TAGS = (); }; };
@@ -40,13 +42,16 @@
 		CDF6D8381B92AB50009E44DD /* SXHttpLoadHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CDF6D8371B92AB50009E44DD /* SXHttpLoadHandler.m */; };
 		CDF6D83B1B92AB87009E44DD /* SXPOSTRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = CDF6D83A1B92AB87009E44DD /* SXPOSTRequest.m */; };
 		CDF6D83E1B92ABA2009E44DD /* SXHttpLoadUploadFile.m in Sources */ = {isa = PBXBuildFile; fileRef = CDF6D83D1B92ABA2009E44DD /* SXHttpLoadUploadFile.m */; };
-		CDF6D8411B92ABC4009E44DD /* SXHttpLoadRequestQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = CDF6D8401B92ABC4009E44DD /* SXHttpLoadRequestQueue.m */; };
 		CDF6D8441B92ABF7009E44DD /* SXHttpLoadUploadImage.m in Sources */ = {isa = PBXBuildFile; fileRef = CDF6D8431B92ABF7009E44DD /* SXHttpLoadUploadImage.m */; };
 		CDF6D8481B92B260009E44DD /* SXHttpLoadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CDF6D8471B92B260009E44DD /* SXHttpLoadManager.m */; };
 		CDF6D84B1B931331009E44DD /* TestNetworkController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDF6D84A1B931331009E44DD /* TestNetworkController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9B867C011BBF463700D41C93 /* SXMutliDoLoadRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SXMutliDoLoadRequest.h; sourceTree = "<group>"; };
+		9B867C021BBF463700D41C93 /* SXMutliDoLoadRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SXMutliDoLoadRequest.m; sourceTree = "<group>"; };
+		9B867C041BBF502100D41C93 /* NSObject+Equal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Equal.h"; sourceTree = "<group>"; };
+		9B867C051BBF502100D41C93 /* NSObject+Equal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Equal.m"; sourceTree = "<group>"; };
 		9B86BD741BBBF80D008D22DD /* SToolPage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SToolPage.framework; path = ../../../../Desktop/SToolPage.framework; sourceTree = "<group>"; };
 		9B86BD761BBC050C008D22DD /* SXGETRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SXGETRequest.h; sourceTree = "<group>"; };
 		9B86BD771BBC050C008D22DD /* SXGETRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SXGETRequest.m; sourceTree = "<group>"; };
@@ -115,8 +120,6 @@
 		CDF6D83A1B92AB87009E44DD /* SXPOSTRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SXPOSTRequest.m; sourceTree = "<group>"; };
 		CDF6D83C1B92ABA2009E44DD /* SXHttpLoadUploadFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SXHttpLoadUploadFile.h; sourceTree = "<group>"; };
 		CDF6D83D1B92ABA2009E44DD /* SXHttpLoadUploadFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SXHttpLoadUploadFile.m; sourceTree = "<group>"; };
-		CDF6D83F1B92ABC4009E44DD /* SXHttpLoadRequestQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SXHttpLoadRequestQueue.h; sourceTree = "<group>"; };
-		CDF6D8401B92ABC4009E44DD /* SXHttpLoadRequestQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SXHttpLoadRequestQueue.m; sourceTree = "<group>"; };
 		CDF6D8421B92ABF7009E44DD /* SXHttpLoadUploadImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SXHttpLoadUploadImage.h; sourceTree = "<group>"; };
 		CDF6D8431B92ABF7009E44DD /* SXHttpLoadUploadImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SXHttpLoadUploadImage.m; sourceTree = "<group>"; };
 		CDF6D8451B92AF8F009E44DD /* SXHttpLoadDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SXHttpLoadDelegate.h; sourceTree = "<group>"; };
@@ -310,14 +313,16 @@
 				CDF6D8451B92AF8F009E44DD /* SXHttpLoadDelegate.h */,
 				CDF6D8361B92AB50009E44DD /* SXHttpLoadHandler.h */,
 				CDF6D8371B92AB50009E44DD /* SXHttpLoadHandler.m */,
-				CDF6D83F1B92ABC4009E44DD /* SXHttpLoadRequestQueue.h */,
-				CDF6D8401B92ABC4009E44DD /* SXHttpLoadRequestQueue.m */,
 				CDF6D83C1B92ABA2009E44DD /* SXHttpLoadUploadFile.h */,
 				CDF6D83D1B92ABA2009E44DD /* SXHttpLoadUploadFile.m */,
 				CDF6D8421B92ABF7009E44DD /* SXHttpLoadUploadImage.h */,
 				CDF6D8431B92ABF7009E44DD /* SXHttpLoadUploadImage.m */,
 				CDF6D8391B92AB87009E44DD /* SXPOSTRequest.h */,
 				CDF6D83A1B92AB87009E44DD /* SXPOSTRequest.m */,
+				9B867C011BBF463700D41C93 /* SXMutliDoLoadRequest.h */,
+				9B867C021BBF463700D41C93 /* SXMutliDoLoadRequest.m */,
+				9B867C041BBF502100D41C93 /* NSObject+Equal.h */,
+				9B867C051BBF502100D41C93 /* NSObject+Equal.m */,
 			);
 			name = Request;
 			sourceTree = "<group>";
@@ -444,9 +449,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CDF6D8411B92ABC4009E44DD /* SXHttpLoadRequestQueue.m in Sources */,
 				CDB7323C1B948E3E00ADBC06 /* SXRespBaseBody.m in Sources */,
 				CD354FB91B915C340046D263 /* PushTest2Segue.m in Sources */,
+				9B867C061BBF502100D41C93 /* NSObject+Equal.m in Sources */,
 				CD14F79D1B909056007BF19A /* TestTableViewController.m in Sources */,
 				CDF6D83B1B92AB87009E44DD /* SXPOSTRequest.m in Sources */,
 				CDF6D8481B92B260009E44DD /* SXHttpLoadManager.m in Sources */,
@@ -465,6 +470,7 @@
 				CD14F7A01B9098E4007BF19A /* Table2ViewController.m in Sources */,
 				CD14F7B81B90AEC3007BF19A /* UIViewController+Base.m in Sources */,
 				CDB732341B94053B00ADBC06 /* TestNetAdrEntity.m in Sources */,
+				9B867C031BBF463700D41C93 /* SXMutliDoLoadRequest.m in Sources */,
 				CD14F7A81B90A271007BF19A /* SXibLoadHandler.m in Sources */,
 				CD14F7AF1B90A54A007BF19A /* MainNavigationController.m in Sources */,
 				CD14F72A1B908D75007BF19A /* main.m in Sources */,

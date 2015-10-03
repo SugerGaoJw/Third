@@ -48,7 +48,7 @@
         url =  [NSString stringWithFormat:@"%@%@",mainDomin,[reqBody getReqURLSuffix]];
     }
     SLog(@"------------- Request Begin -------------");
-    SLog(@"------> %@",url);
+    SLog(@"%@",url);
     
     //获取反射类 以及 清理MBP block 
     _respClassName = [reqBody getRespClassName];
@@ -59,6 +59,15 @@
     NSURL* reqURL = [NSURL URLWithString:url];
     NSDictionary* reqBodyDic = [reqBody toBodyDictionary];
     NSDictionary* reqHeadDic = [reqBody toHeadDictionary];
+    
+    BOOL empty1 = [NSObject isEqualSrcObject:(id)_respClassName EnqualClass:[NSString class]];
+    BOOL empty2 = [NSObject isEqualSrcObject:(id)reqURL EnqualClass:[NSURL class]];
+    BOOL empty3 = [NSObject isEqualSrcObject:(id)reqBodyDic EnqualClass:[NSDictionary class]];
+    
+    if (  !empty3 || !empty2 || !empty1) {
+        SLog(@" empty3 || empty2 || empty1 check value is Failed");
+        return ;
+    }
     
     [self sxfetchURL:reqURL withReqHeadDic:reqHeadDic andReqBodyDic:reqBodyDic];
 }
@@ -74,17 +83,19 @@
     //调用子类的 -createWithURL:BodyParams: 方法
     //传入只有 bodyDic 参数，headDic 参数在外面生成
     _asiHttpRequestObject = [self createWithURL:url BodyParams:bodyDic];
-    if (_asiHttpRequestObject == nil || _respClassName == nil) {
+    if (_asiHttpRequestObject == nil) {
+        SLog(@"_asiHttpRequestObject is nil ");
         [self sxCleanResource];
     }
-    //设置头部请求参数 headDic
+    
+    //如果是 ASIHTTPRequest 对象 设置头部请求参数 headDic 并且启动对象
     if ([_asiHttpRequestObject isKindOfClass:[ASIHTTPRequest class]]) {
         [self sxAppendRequset:_asiHttpRequestObject HeandParams:headDic];
-      
+        //开始异部请求
+        [_asiHttpRequestObject setTimeOutSeconds:60.f];
+        [_asiHttpRequestObject startAsynchronous];
     }
-    //开始异部请求
-    [_asiHttpRequestObject setTimeOutSeconds:60.f];
-    [_asiHttpRequestObject startAsynchronous];
+   
 }
 
 - (void)sxSetHttpLoadRequests:(NSArray *)reqArray {
@@ -103,7 +114,7 @@
 - (void)sxForceCancel {
     if ([_asiHttpRequestObject isMemberOfClass:[ASIHTTPRequest class]]) {
         ASIHTTPRequest* req = _asiHttpRequestObject;
-        [req cancel];
+        [req clearDelegatesAndCancel];
         
     }else if ([_asiHttpRequestObject isKindOfClass:[ASINetworkQueue class]]) {
         ASINetworkQueue* queue = _asiHttpRequestObject;
@@ -173,13 +184,14 @@
  */
 - (void)asiFetchFailed:(ASIHTTPRequest *)theRequest{
     
-    BOOL isRespError = NO;
+    BOOL isRespError = YES;
     NSInteger code = [[theRequest error] code];
-    if ( code != ASIRequestCancelledErrorType ||
+    
+    /*if ( code != ASIRequestCancelledErrorType ||
         [[theRequest error] domain] != NetworkRequestErrorDomain) {
         
         isRespError = YES;
-    }
+    }*/
     
     SXHttpLoadManager* manager = [SXHttpLoadManager shareInstance];
     NSString*  description = [manager getErrDescriptionByKey:code];
@@ -206,36 +218,35 @@
     
     //parse respond object
     id obj = [ASIJSONTool toJSONData:[theRequest responseData] ];
-    if (obj == nil
-        || [obj isKindOfClass:[NSNull class]]) {
+    if (![NSObject isEqualSrcObject:obj EnqualClass:[NSObject class]]) {
         
         _failedHandlerBlock();
         
     }else {
-        
-        if (_respClassName == nil
-            || [_respClassName isKindOfClass:[NSNull class]]) {
+        //根据反射对象，实例化相对应对象
+        id<SXRespBodyDelegate> respBody = [self initWithClassName:_respClassName];
+        if ([respBody respondsToSelector:@selector(toEntityWithValues:)]) {
             
-            _failedHandlerBlock();
+            respObject = [respBody toEntityWithValues:obj];
             
         }else{
-            //根据反射对象，实例化相对应对象
-            id<SXRespBodyDelegate> respBody = [self initWithClassName:_respClassName];
-            if ([respBody respondsToSelector:@selector(toEntityWithValues:)]) {
-                
-                respObject = [respBody toEntityWithValues:obj];
-                
-            }else{
-                
-                _failedHandlerBlock();
-            }
+            //实例失败，报错
+            _failedHandlerBlock();
         }
+
     }
     SLog(@"%@",[respObject keyValues]);
     if (_finishBlock) _finishBlock(isRespError,description,respObject);
     [self sxCleanResource];
 }
+
+
+#pragma mark - SubObject Override
 - (id<NSCopying>)createWithURL:(NSURL *)url BodyParams:(id<NSCopying>)bodyParams {
+    return nil;
+}
+
+- (id<NSCopying>)createMutliURL:(id<NSCopying>/* NSURL* */)urls BodyParams:(id<NSCopying>)bodyParams {
     return nil;
 }
 @end

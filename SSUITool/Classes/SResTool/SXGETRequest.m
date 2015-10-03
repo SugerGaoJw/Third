@@ -19,11 +19,10 @@
 @end
 
 @implementation SXGETRequest
-- (id<NSCopying>)createWithURL:(NSURL *)url BodyParams:(id<NSCopying>)bodyParams {
+- (id<NSCopying>)createWithURL:(NSURL *)url BodyParams:(NSDictionary *)bodyParams {
     //set req body
-    id obj = bodyParams;
-    if (url == nil || bodyParams == nil
-        || ![obj isKindOfClass:[NSDictionary class]]) {
+    if (![NSObject isEqualSrcObject:(id)url EnqualClass:[NSURL class]]
+        ||![NSObject isEqualSrcObject:(id)bodyParams EnqualClass:[NSDictionary class]]) {
         SLog(@"url or bodyParams is nil ");
         return nil;
     }
@@ -56,9 +55,7 @@
 - (NSString *)pdtURLSuffixByParams:(id )params {
     
     NSDictionary* dic = nil;
-    if (![params isKindOfClass:[NSDictionary class]]
-        || [params isKindOfClass:[NSNull class]]
-        || params == nil) {
+    if (![NSObject isEqualSrcObject:params EnqualClass:[NSDictionary class]]) {
         return nil;
     }
     

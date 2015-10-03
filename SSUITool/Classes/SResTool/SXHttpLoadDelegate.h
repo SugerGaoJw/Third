@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "SXRespBodyDelegate.h"
+#include "NSObject+Equal.h"
 
 
 /*!--------------------------------------------------------------------
@@ -32,6 +33,17 @@ typedef NS_ENUM(NSInteger,EN_REQUEST_METHOD){
      *  DELETE 请求枚举
      */
     EN_REQUEST_DELETE,
+    /*!
+     *  支持多个文件上传，未知支持断点上传 ？？
+     */
+    EN_REQUEST_MUTLI_UPLOAD,
+    /*!
+     *  支持多个文件下载，支持断点续传
+     */
+    EN_REQUEST_MUTLI_DOWNLOAD,
+    
+    
+    
 };
 /*!--------------------------------------------------------------------
  *  定义 wself
@@ -82,6 +94,8 @@ typedef void(^SXHttpRequestFailedBlock)(BOOL isRespError,
 - (NSString *)hashKey;
 //init
 - (id<NSCopying>)createWithURL:(NSURL *)url BodyParams:(id<NSCopying>)bodyParams;
+- (id<NSCopying>)createMutliURL:(id<NSCopying>/* NSURL* */)urls BodyParams:(id<NSCopying>)bodyParams;
+
 //callback
 - (void)asiFetchFailed:(ASIHTTPRequest *)theRequest;
 - (void)asiFetchFinish:(ASIHTTPRequest *)theRequest;
