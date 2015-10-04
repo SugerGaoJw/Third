@@ -14,6 +14,7 @@
 		9BA809301BBD207100037E3C /* TestNetMovieEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA8092F1BBD207100037E3C /* TestNetMovieEntity.m */; settings = {ASSET_TAGS = (); }; };
 		9BDDCAA41BBBA45A00B37262 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BDDCAA31BBBA45A00B37262 /* libxml2.tbd */; };
 		9BDDCAA61BBBA46700B37262 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BDDCAA51BBBA46700B37262 /* libz.tbd */; };
+		9BE69A951BC0A10F00ADDB8C /* SXMutliStatusMachine.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE69A941BC0A10F00ADDB8C /* SXMutliStatusMachine.m */; settings = {ASSET_TAGS = (); }; };
 		CD14F72A1B908D75007BF19A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CD14F7291B908D75007BF19A /* main.m */; };
 		CD14F72D1B908D75007BF19A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CD14F72C1B908D75007BF19A /* AppDelegate.m */; };
 		CD14F7331B908D75007BF19A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD14F7311B908D75007BF19A /* Main.storyboard */; };
@@ -59,6 +60,8 @@
 		9BA8092F1BBD207100037E3C /* TestNetMovieEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestNetMovieEntity.m; sourceTree = "<group>"; };
 		9BDDCAA31BBBA45A00B37262 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
 		9BDDCAA51BBBA46700B37262 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		9BE69A931BC0A10F00ADDB8C /* SXMutliStatusMachine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SXMutliStatusMachine.h; sourceTree = "<group>"; };
+		9BE69A941BC0A10F00ADDB8C /* SXMutliStatusMachine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SXMutliStatusMachine.m; sourceTree = "<group>"; };
 		CD14F7241B908D75007BF19A /* SSUITool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SSUITool.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD14F7281B908D75007BF19A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CD14F7291B908D75007BF19A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -147,6 +150,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9BE69A901BC0A0A600ADDB8C /* MutilDoload */ = {
+			isa = PBXGroup;
+			children = (
+				9BE69A931BC0A10F00ADDB8C /* SXMutliStatusMachine.h */,
+				9BE69A941BC0A10F00ADDB8C /* SXMutliStatusMachine.m */,
+				9B867C011BBF463700D41C93 /* SXMutliDoLoadRequest.h */,
+				9B867C021BBF463700D41C93 /* SXMutliDoLoadRequest.m */,
+			);
+			name = MutilDoload;
+			sourceTree = "<group>";
+		};
 		CD14F71B1B908D75007BF19A = {
 			isa = PBXGroup;
 			children = (
@@ -308,6 +322,7 @@
 		CDB732351B94310800ADBC06 /* Request */ = {
 			isa = PBXGroup;
 			children = (
+				9BE69A901BC0A0A600ADDB8C /* MutilDoload */,
 				9B86BD761BBC050C008D22DD /* SXGETRequest.h */,
 				9B86BD771BBC050C008D22DD /* SXGETRequest.m */,
 				CDF6D8451B92AF8F009E44DD /* SXHttpLoadDelegate.h */,
@@ -319,8 +334,6 @@
 				CDF6D8431B92ABF7009E44DD /* SXHttpLoadUploadImage.m */,
 				CDF6D8391B92AB87009E44DD /* SXPOSTRequest.h */,
 				CDF6D83A1B92AB87009E44DD /* SXPOSTRequest.m */,
-				9B867C011BBF463700D41C93 /* SXMutliDoLoadRequest.h */,
-				9B867C021BBF463700D41C93 /* SXMutliDoLoadRequest.m */,
 				9B867C041BBF502100D41C93 /* NSObject+Equal.h */,
 				9B867C051BBF502100D41C93 /* NSObject+Equal.m */,
 			);
@@ -457,6 +470,7 @@
 				CDF6D8481B92B260009E44DD /* SXHttpLoadManager.m in Sources */,
 				9BA809301BBD207100037E3C /* TestNetMovieEntity.m in Sources */,
 				CDB732381B947B0000ADBC06 /* SBaseViewController.m in Sources */,
+				9BE69A951BC0A10F00ADDB8C /* SXMutliStatusMachine.m in Sources */,
 				CD14F7A31B909A48007BF19A /* TestTableCell.m in Sources */,
 				CD14F7971B908F0A007BF19A /* STabelViewCell.m in Sources */,
 				CD354FB01B91482A0046D263 /* SXResLoadHandler.m in Sources */,
