@@ -34,4 +34,10 @@ NSCopy NSString* respClassName;
 
 //利用 runtime 生成对象
 - (instancetype)initWithClassName:(NSString *)className;
+
+/*!
+ *  通过 dictionary 对象生成 URL 后缀
+ *  @return URL 后缀
+ */
+- ( NSString *)pdtURLSuffixByParams:(id ) params ;
 @end

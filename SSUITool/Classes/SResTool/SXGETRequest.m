@@ -8,14 +8,7 @@
 
 #import "SXGETRequest.h"
 @interface SXGETRequest ()
-/*!
- *  @author Suger G, 15-10-01 07:10:36
- *
- *  通过 dictionary 对象生成 URL 后缀
- *
- *  @return URL 后缀
- */
-- ( NSString *)pdtURLSuffixByParams:(id ) params ;
+
 @end
 
 @implementation SXGETRequest
@@ -30,7 +23,7 @@
     //判断 是否有参数，如果有参数，根据 GET 请求方式拼配参数
 
     NSURL* reqURL = url;
-    NSString* urlSuffix = [self pdtURLSuffixByParams:bodyParams];
+    NSString* urlSuffix = [super pdtURLSuffixByParams:bodyParams];
     if (urlSuffix != nil) {
         NSString* multiStr = [NSString stringWithFormat:@"%@%@",url,urlSuffix];
         reqURL = [multiStr url];
@@ -52,28 +45,5 @@
     return req;
 }
 
-- (NSString *)pdtURLSuffixByParams:(id )params {
-    
-    NSDictionary* dic = nil;
-    if (![NSObject isEqualSrcObject:params EnqualClass:[NSDictionary class]]) {
-        return nil;
-    }
-    
-    dic = ( NSDictionary *)params;
-    NSMutableString* str = [[NSMutableString alloc]init];
-    [str appendString:@"?"];
-    
-    //循环迭代字典
-    [dic enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
-        NSString* part = [NSString stringWithFormat:@"%@=%@&",key,obj];
-        [str appendString:part];
-    }];
-    //去掉最后一个 & 符号
-    NSString* urlSuffix = [str substringWithRange:NSMakeRange(0, str.length - 1)];
-    if (urlSuffix.length <= 0) {
-        return nil;
-    }
-    return urlSuffix;
-    
-}
+
 @end

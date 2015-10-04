@@ -18,6 +18,8 @@
 #import "ASIFormDataRequest.h"
 #import "ASIHTTPRequest.h"
 #import "ASINetworkQueue.h"
+#import "ASIDownloadCache.h"
+
 #import "ASIJSONTool.h"
 #import "MRZoomControllerScrollView.h"
 #import "UIImageView+WebCache.h"

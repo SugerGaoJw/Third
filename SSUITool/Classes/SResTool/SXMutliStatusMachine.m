@@ -7,15 +7,18 @@
 //
 
 #import "SXMutliStatusMachine.h"
+#import "NSObject+Equal.h"
+
 @interface SXMutliStatusMachine () {
     
     __weak id<SXMutliStatusMachineDelegate> _sDelegate;
     ENMutliDoloadStatus _enStatus;
 }
-- (BOOL)_checkSDelegateMethod:(SEL)aSelector;
+
 @end
 
 @implementation SXMutliStatusMachine
+
 - (instancetype)initWithDelegate:(id)sDelegate {
     if (self = [super init]) {
         // weak reference to delegate object
@@ -25,6 +28,7 @@
     }
     return self;
 }
+
 - (void)stlMachineForStatus:(ENMutliDoloadStatus)enStatus {
     if (_enStatus == enStatus) {
         return;
@@ -35,7 +39,7 @@
         case ENPreparedStatus:{
             
             aSel = @selector(callBakPreparedMutliStatus);
-            if ([self _checkSDelegateMethod:aSel]) {
+            if ([NSObject isDelegate:_sDelegate forImplementdSelector:aSel]) {
                 [_sDelegate callBakPreparedMutliStatus];
             }else{
                 SLog(@"callBakPreparedMutliStatus isn't implementation");
@@ -45,7 +49,7 @@
         case ENDoloadingStatus:{
             
             aSel = @selector(callBakDoloadingMutliStatus);
-            if ([self _checkSDelegateMethod:aSel]) {
+            if ([NSObject isDelegate:_sDelegate forImplementdSelector:aSel]) {
                 [_sDelegate callBakDoloadingMutliStatus];
             }else{
                 SLog(@"callBakDoloadingMutliStatus isn't implementation");
@@ -55,7 +59,7 @@
         case ENPausedStatus:{
             
             aSel = @selector(callBakPausedMutliStatus);
-            if ([self _checkSDelegateMethod:aSel]) {
+            if ([NSObject isDelegate:_sDelegate forImplementdSelector:aSel]) {
                 [_sDelegate callBakPausedMutliStatus];
             }else{
                 SLog(@"callBakPausedMutliStatus isn't implementation");
@@ -64,7 +68,7 @@
         case ENFinishedStatus:{
             
             aSel = @selector(callBakFinishedMutliStatus);
-            if ([self _checkSDelegateMethod:aSel]) {
+            if ([NSObject isDelegate:_sDelegate forImplementdSelector:aSel]) {
                 [_sDelegate callBakFinishedMutliStatus];
             }else{
                 SLog(@"callBakFinishedMutliStatus isn't implementation");
@@ -77,14 +81,6 @@
     }
 }
 
-#pragma mark - 私有方法
-- (BOOL)_checkSDelegateMethod:(SEL)aSelector {
-    
-    if (_sDelegate && [_sDelegate respondsToSelector:aSelector]) {
-        return YES;
-    }
-    return NO;
-}
 - (ENMutliDoloadStatus)getMutliDoloadStatus {
     
     return _enStatus;

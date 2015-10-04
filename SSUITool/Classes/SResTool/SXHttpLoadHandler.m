@@ -12,7 +12,7 @@
 #endif
 
 @interface SXHttpLoadHandler(){
-    __weak id _asiHttpRequestObject;
+    __weak id _asiRquest;
     NSString* _hashKey;
 }
 - (void)sxfetchURL:(NSURL *)url
@@ -82,26 +82,33 @@
     
     //调用子类的 -createWithURL:BodyParams: 方法
     //传入只有 bodyDic 参数，headDic 参数在外面生成
-    _asiHttpRequestObject = [self createWithURL:url BodyParams:bodyDic];
-    if (_asiHttpRequestObject == nil) {
+    _asiRquest = [self createWithURL:url BodyParams:bodyDic];
+    if (_asiRquest == nil) {
         SLog(@"_asiHttpRequestObject is nil ");
         [self sxCleanResource];
     }
     
     //如果是 ASIHTTPRequest 对象 设置头部请求参数 headDic 并且启动对象
-    if ([_asiHttpRequestObject isKindOfClass:[ASIHTTPRequest class]]) {
-        [self sxAppendRequset:_asiHttpRequestObject HeandParams:headDic];
-        //开始异部请求
-        [_asiHttpRequestObject setTimeOutSeconds:60.f];
-        [_asiHttpRequestObject startAsynchronous];
+    if ([_asiRquest isKindOfClass:[ASIHTTPRequest class]]) {
+        [self sxAppendRequset:_asiRquest HeandParams:headDic];
+        //开始异部请求,设置超时时间 60.f ,设置缓存
+        [_asiRquest setTimeOutSeconds:60.f];
+        
+        //如果 cache 未设置，则设置 cache
+        if ([_asiRquest downloadCache] == nil) {
+            [_asiRquest setDownloadCache:[ASIDownloadCache sharedCache]];
+            [_asiRquest setCacheStoragePolicy:ASIAskServerIfModifiedCachePolicy];
+        }
+        
+        [_asiRquest startAsynchronous];
     }
    
 }
 
 - (void)sxSetHttpLoadRequests:(NSArray *)reqArray {
     
-    _asiHttpRequestObject = [self createWithURL:nil BodyParams:reqArray];
-    if (_asiHttpRequestObject == nil) {
+    _asiRquest = [self createWithURL:nil BodyParams:reqArray];
+    if (_asiRquest == nil) {
         [self sxCleanResource];
     }
     
@@ -112,12 +119,12 @@
  *  强制取消请求对象
  */
 - (void)sxForceCancel {
-    if ([_asiHttpRequestObject isMemberOfClass:[ASIHTTPRequest class]]) {
-        ASIHTTPRequest* req = _asiHttpRequestObject;
+    if ([_asiRquest isMemberOfClass:[ASIHTTPRequest class]]) {
+        ASIHTTPRequest* req = _asiRquest;
         [req clearDelegatesAndCancel];
         
-    }else if ([_asiHttpRequestObject isKindOfClass:[ASINetworkQueue class]]) {
-        ASINetworkQueue* queue = _asiHttpRequestObject;
+    }else if ([_asiRquest isKindOfClass:[ASINetworkQueue class]]) {
+        ASINetworkQueue* queue = _asiRquest;
         [queue reset];
         
     }else{
@@ -131,7 +138,7 @@
  */
 - (void)sxCleanResource {
     
-    _asiHttpRequestObject = nil;
+    _asiRquest = nil;
     _finishBlock = nil;
     _failedBlock = nil;
     _respClassName = nil;
@@ -240,7 +247,31 @@
     [self sxCleanResource];
 }
 
-
+- ( NSString *)pdtURLSuffixByParams:(id ) params  {
+    
+    NSDictionary* dic = nil;
+    if (![NSObject isEqualSrcObject:params EnqualClass:[NSDictionary class]]) {
+        return nil;
+    }
+    
+    dic = ( NSDictionary *)params;
+    NSMutableString* str = [[NSMutableString alloc]init];
+    [str appendString:@"?"];
+    
+    //循环迭代字典
+    [dic enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+        NSString* part = [NSString stringWithFormat:@"%@=%@&",key,obj];
+        [str appendString:part];
+    }];
+    
+    //去掉最后一个 & 符号
+    NSString* urlSuffix = [str substringWithRange:NSMakeRange(0, str.length - 1)];
+    if (urlSuffix.length <= 0) {
+        return nil;
+    }
+    return urlSuffix;
+    
+}
 #pragma mark - SubObject Override
 - (id<NSCopying>)createWithURL:(NSURL *)url BodyParams:(id<NSCopying>)bodyParams {
     return nil;

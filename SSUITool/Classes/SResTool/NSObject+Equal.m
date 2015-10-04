@@ -19,4 +19,14 @@
     
     return [srcObject isKindOfClass:equalClass];
 }
+
+#pragma mark -  判断是否实现指定方法
++ (BOOL)isDelegate:(id)delegate forImplementdSelector:(SEL)aSelector {
+    
+    if (delegate && [delegate respondsToSelector:aSelector]) {
+        return YES;
+    }
+    return NO;
+}
+
 @end

@@ -21,4 +21,15 @@
  *  @return 判断是否成功
  */
 + (BOOL)isEqualSrcObject:(id)srcObject EnqualClass:(Class)equalClass;
+
+#pragma mark -  判断是否实现指定方法
+/*!
+ *  判断当前的delegate 是否实现指定方法
+ *
+ *  @param delegate  指定的Delegate 对象
+ *  @param aSelector 指定的实现方法
+ *
+ *  @return 是否实现
+ */
++ (BOOL)isDelegate:(id)delegate forImplementdSelector:(SEL)aSelector;
 @end

@@ -15,6 +15,7 @@
 NSStrong NSMutableDictionary* dictionary;
 
 - (__weak id<SXHttpLoadDelegate>)pdtHttpRequestByEnum:(EN_REQUEST_METHOD)enReqMethod;
++ (void)cfgASIRequestResourceCache;
 @end
 
 static SXHttpLoadManager* instance = nil;
@@ -23,6 +24,8 @@ static SXHttpLoadManager* instance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         instance = [[SXHttpLoadManager alloc]init];
+        //Config ASIHttpRequest Download Request Cache
+        [SXHttpLoadManager cfgASIRequestResourceCache];
     });
     return instance;
 }
@@ -33,6 +36,7 @@ static SXHttpLoadManager* instance = nil;
     }
     return _dictionary;
 }
+
 
 #pragma mark -- Url
 - (NSString *)mainReqURL {
@@ -137,4 +141,17 @@ static SXHttpLoadManager* instance = nil;
     return [self.dictionary objectForKey:key];
 }
 
+#pragma mark - ASIHTTPRequest Cache
++ (void)cfgASIRequestResourceCache {
+    ASIDownloadCache* cache = [ASIDownloadCache sharedCache];
+    
+    //设置缓存路径
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentDirectory = [[paths firstObject] stringByAppendingPathComponent:@"com.asihttprequest.file.cache"];
+    SLog(@"cache path is %@",documentDirectory);
+    [cache setStoragePath:documentDirectory];
+    [cache setDefaultCachePolicy:ASIOnlyLoadIfNotCachedCachePolicy];
+    
+    
+}
 @end
