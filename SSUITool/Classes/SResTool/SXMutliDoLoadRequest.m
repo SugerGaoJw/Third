@@ -64,12 +64,14 @@
     // Note: we are forcing it to perform a conditional GET
     [req setCachePolicy:ASIAskServerIfModifiedCachePolicy];
     [req setDownloadCache:cache];
-//    [req setSecondsToCache:1.f];
 
     
     //设置下载地址
-    NSString *path = [cache pathToDoloadDestinationCachedForURL:url];
+    NSString *path = [cache pathToDoloadCachedForURL:url IsTemporaryPath:NO];
     if (path != nil) [req setDownloadDestinationPath:path];
+    
+     path = [cache pathToDoloadCachedForURL:url IsTemporaryPath:YES];
+     if (path != nil) [req setTemporaryFileDownloadPath:path];
     
     //设置machine 状态
     [_machine stlMachineForStatus:ENPreparedStatus];

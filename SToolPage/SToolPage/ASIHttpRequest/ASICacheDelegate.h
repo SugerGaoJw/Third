@@ -102,5 +102,5 @@ typedef enum _ASICacheStoragePolicy {
 /*!
  *  返回一个下载保存路径
  */
-- (NSString *)pathToDoloadDestinationCachedForURL:(NSURL *)url;
+- (NSString *)pathToDoloadCachedForURL:(NSURL *)url IsTemporaryPath:(BOOL)isTemporaryPath;
 @end

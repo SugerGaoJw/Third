@@ -248,9 +248,7 @@ static NSArray *fileExtensionsToHandleAsHTML = nil;
 	[[self accessLock] unlock];
 	return nil;
 }
-
-- (NSString *)pathToDoloadDestinationCachedForURL:(NSURL *)url {
-    
+- (NSString *)pathToDoloadCachedForURL:(NSURL *)url IsTemporaryPath:(BOOL)isTemporaryPath {
     // Grab the file extension, if there is one. We do this so we can save the cached response with the same file extension - this is important if you want to display locally cached data in a web view
     NSString *extension = [[url path] pathExtension];
     NSLog(@"--> %@",extension);
@@ -263,7 +261,7 @@ static NSArray *fileExtensionsToHandleAsHTML = nil;
     if (![extension length] || [[[self class] fileExtensionsToHandleAsHTML] containsObject:[extension lowercaseString]]) {
         extension = @"html";
     }
-
+    
     
     NSString* fileName = [[[self class] keyForURL:url] stringByAppendingPathExtension:extension];
     if (fileName == nil) {
@@ -271,10 +269,12 @@ static NSArray *fileExtensionsToHandleAsHTML = nil;
     }
     NSLog(@"--> fileName is %@",fileName);
     
-    NSString* sessionCachePath = [[self storagePath] stringByAppendingPathComponent:sessionCacheFolder];
+    NSString* sessionCachePath = [[self storagePath] stringByAppendingPathComponent:isTemporaryPath ?sessionCacheFolder : permanentCacheFolder];
+    
     NSString* doloadDestPath = [sessionCachePath stringByAppendingPathComponent:fileName];
     return doloadDestPath;
 }
+
 
 - (NSString *)pathToStoreCachedResponseDataForRequest:(ASIHTTPRequest *)request
 {
