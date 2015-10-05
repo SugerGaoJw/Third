@@ -89,12 +89,24 @@ typedef void(^SXHttpRequestFailedBlock)(BOOL isRespError,
  *  --------------------------------------------------------------------
  */
 
+/*!
+ *  请求过程返回block
+ *
+ *  @param doloadPercentage 下载百分比
+ *  @param totalPercentage  总下载量
+ *
+ *  @return 是否停止请求过程
+ */
+typedef BOOL(^MutliDoloadingProgressBlock)(CGFloat doloadPercentage,CGFloat totalPercentage);
+/*!
+ *  --------------------------------------------------------------------
+ */
 @protocol SXHttpLoadDelegate <NSObject,ASIHTTPRequestDelegate>
 //key
 - (NSString *)hashKey;
 //init
 - (id<NSCopying>)createWithURL:(NSURL *)url BodyParams:(id<NSCopying>)bodyParams;
-- (id<NSCopying>)createMutliURL:(id<NSCopying>/* NSURL* */)urls BodyParams:(id<NSCopying>)bodyParams;
+//- (id<NSCopying>)createMutliURL:(id<NSCopying>/* NSURL* */)urls BodyParams:(id<NSCopying>)bodyParams;
 
 //callback
 - (void)asiFetchFailed:(ASIHTTPRequest *)theRequest;

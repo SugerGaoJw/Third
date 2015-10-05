@@ -33,4 +33,8 @@ NSCopy NSString* mainReqURL;
                   onFinishBlock:(SXHttpRequestFinishBlock)_finishBlock
                    onFiledBlock:(SXHttpRequestFailedBlock)_failedBlock;
 
+- (__weak id<SXHttpLoadDelegate>)requestAtBody:(id<SXReqBodyDelegate>)reqBody
+                         onDoloadProgressBlock:(MutliDoloadingProgressBlock)_doloadProgressBlock
+                                 onFinishBlock:(SXHttpRequestFinishBlock)_finishBlock
+                                  onFiledBlock:(SXHttpRequestFailedBlock)_failedBlock;
 @end

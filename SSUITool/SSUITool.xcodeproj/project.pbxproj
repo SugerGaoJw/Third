@@ -14,6 +14,7 @@
 		9BA809301BBD207100037E3C /* TestNetMovieEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA8092F1BBD207100037E3C /* TestNetMovieEntity.m */; settings = {ASSET_TAGS = (); }; };
 		9BDDCAA41BBBA45A00B37262 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BDDCAA31BBBA45A00B37262 /* libxml2.tbd */; };
 		9BDDCAA61BBBA46700B37262 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BDDCAA51BBBA46700B37262 /* libz.tbd */; };
+		9BE0B3F61BC2197700A8C8FA /* TestSingleDoloadEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE0B3F51BC2197700A8C8FA /* TestSingleDoloadEntity.m */; settings = {ASSET_TAGS = (); }; };
 		9BE69A951BC0A10F00ADDB8C /* SXMutliStatusMachine.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE69A941BC0A10F00ADDB8C /* SXMutliStatusMachine.m */; settings = {ASSET_TAGS = (); }; };
 		CD14F72A1B908D75007BF19A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CD14F7291B908D75007BF19A /* main.m */; };
 		CD14F72D1B908D75007BF19A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CD14F72C1B908D75007BF19A /* AppDelegate.m */; };
@@ -60,6 +61,8 @@
 		9BA8092F1BBD207100037E3C /* TestNetMovieEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestNetMovieEntity.m; sourceTree = "<group>"; };
 		9BDDCAA31BBBA45A00B37262 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
 		9BDDCAA51BBBA46700B37262 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		9BE0B3F41BC2197700A8C8FA /* TestSingleDoloadEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestSingleDoloadEntity.h; sourceTree = "<group>"; };
+		9BE0B3F51BC2197700A8C8FA /* TestSingleDoloadEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestSingleDoloadEntity.m; sourceTree = "<group>"; };
 		9BE69A931BC0A10F00ADDB8C /* SXMutliStatusMachine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SXMutliStatusMachine.h; sourceTree = "<group>"; };
 		9BE69A941BC0A10F00ADDB8C /* SXMutliStatusMachine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SXMutliStatusMachine.m; sourceTree = "<group>"; };
 		CD14F7241B908D75007BF19A /* SSUITool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SSUITool.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -254,6 +257,8 @@
 		CD14F79A1B90900E007BF19A /* TestCase */ = {
 			isa = PBXGroup;
 			children = (
+				9BE0B3F41BC2197700A8C8FA /* TestSingleDoloadEntity.h */,
+				9BE0B3F51BC2197700A8C8FA /* TestSingleDoloadEntity.m */,
 				CD14F79E1B9098E4007BF19A /* Table2ViewController.h */,
 				CD14F79F1B9098E4007BF19A /* Table2ViewController.m */,
 				CD14F7A11B909A48007BF19A /* TestTableCell.h */,
@@ -491,6 +496,7 @@
 				CDF6D8441B92ABF7009E44DD /* SXHttpLoadUploadImage.m in Sources */,
 				CDF6D84B1B931331009E44DD /* TestNetworkController.m in Sources */,
 				CD354FAC1B9140DB0046D263 /* UIViewController+Swizzling.m in Sources */,
+				9BE0B3F61BC2197700A8C8FA /* TestSingleDoloadEntity.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

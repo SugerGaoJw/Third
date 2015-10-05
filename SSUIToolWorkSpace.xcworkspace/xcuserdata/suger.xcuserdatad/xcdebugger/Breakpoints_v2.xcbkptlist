@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "SSUITool/Classes/SResTool/SXHttpLoadManager.m"
-            timestampString = "465639027.762597"
+            filePath = "SSUITool/Classes/SResTool/SXHttpLoadHandler.m"
+            timestampString = "465710156.042381"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "149"
-            endingLineNumber = "149"
-            landmarkName = "+cfgASIRequestResourceCache"
+            startingLineNumber = "205"
+            endingLineNumber = "205"
+            landmarkName = "-asiFetchFailed:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -56,13 +56,13 @@
             }
         }
             break;
-        case ENPausedStatus:{
+        case ENStopedStatus:{
             
-            aSel = @selector(callBakPausedMutliStatus);
+            aSel = @selector(callBakStopedMutliStatus);
             if ([NSObject isDelegate:_sDelegate forImplementdSelector:aSel]) {
-                [_sDelegate callBakPausedMutliStatus];
+                [_sDelegate callBakStopedMutliStatus];
             }else{
-                SLog(@"callBakPausedMutliStatus isn't implementation");
+                SLog(@"callBakStopedMutliStatus isn't implementation");
             }
         }
         case ENFinishedStatus:{

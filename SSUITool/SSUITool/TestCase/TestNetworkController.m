@@ -9,9 +9,12 @@
 #import "TestNetworkController.h"
 #import "TestNetAdrEntity.h"
 #import "TestNetMovieEntity.h"
+#import "TestSingleDoloadEntity.h"
+
 
 gblHttpRequestHeader(RequestPOSTBlock)
 gblHttpRequestHeader(RequestGETBlock)
+gblHttpRequestHeader(SingleDoloadBlock)
 
 @interface TestNetworkController ()
 @end
@@ -82,18 +85,36 @@ gblHttpRequestHeader(RequestGETBlock)
 
 
 
-- (IBAction)doQueueAction:(id)sender {
-    /*
-     SXPOSTRequest* req1 = [[SXPOSTRequest alloc]init];
-     NSURL* url1 = [NSURL URLWithString:@"http://www.baidu.com"];
-     [req1 sxfetchURL:url1 withReqDictionary:nil];
-     
-     SXPOSTRequest* req2 = [[SXPOSTRequest alloc]init];
-     NSURL* url2 = [NSURL URLWithString:@"http://www.baidu.com"];
-     [req2 sxfetchURL:url2 withReqDictionary:nil];
-     
-     SXHttpLoadRequestQueue* queue = [[SXHttpLoadRequestQueue alloc]init];
-     [queue sxSetHttpLoadRequests:@[req1,req2]];*/
+- (IBAction)Single_Mutli_Doload:(id)sender {
+    
+    gblSingleDoloadBlock block;
+    
+    //SXHttpLoadManager
+    block = ^(dispatch_block_t hiddenMBPblock) {
+        
+        TestReqSingleDoloadEntity* req = [[TestReqSingleDoloadEntity alloc]init];
+        req.onCleanMBPBlock = hiddenMBPblock;
+        
+        SXHttpLoadManager* manager =  [SXHttpLoadManager shareInstance];
+        [manager requestAtBody:req onDoloadProgressBlock:^BOOL(CGFloat doloadPercentage, CGFloat totalPercentage) {
+            return NO;
+            
+        } onFinishBlock:^(BOOL isRespError, NSString *errDescription, id<SXRespBodyDelegate> resObject) {
+            
+        } onFiledBlock:^(BOOL isRespError, NSString *errDescription, id resObject) {
+            
+        }];
+        
+    };
+    
+    //MBProgressHUD
+    [MBProgressHUD showInViewNonAutoClean:KMBPSelfViewController
+                               forMessage:@"Request UserAddress..."
+                       withHiddenHUDBlock:^(dispatch_block_t hBlock) {
+                           
+                           block(hBlock);
+                           
+                       }];
 }
 
 @end

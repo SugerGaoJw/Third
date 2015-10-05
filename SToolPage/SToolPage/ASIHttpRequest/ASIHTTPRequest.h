@@ -60,7 +60,8 @@ typedef enum _ASINetworkErrorType {
 	ASIFileManagementError = 8,
 	ASITooMuchRedirectionErrorType = 9,
 	ASIUnhandledExceptionError = 10,
-	ASICompressionError = 11
+	ASICompressionError = 11,
+    ASIDoloadCompletedType = 12
 	
 } ASINetworkErrorType;
 

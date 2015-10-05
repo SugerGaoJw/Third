@@ -49,7 +49,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4HC-mL-y3o">
-                                        <rect key="frame" x="117" y="8" width="46" height="30"/>
+                                        <rect key="frame" x="62" y="8" width="46" height="30"/>
                                         <animations/>
                                         <state key="normal" title="GET"/>
                                         <connections>
@@ -57,13 +57,13 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QPq-Zb-2Tc">
-                                        <rect key="frame" x="226" y="8" width="46" height="30"/>
+                                        <rect key="frame" x="127" y="8" width="138" height="30"/>
                                         <animations/>
-                                        <state key="normal" title="Queue">
+                                        <state key="normal" title="Single-Mutli-Doload">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="doQueueAction:" destination="EOp-rS-xLa" eventType="touchUpInside" id="0KC-U4-wZX"/>
+                                            <action selector="Single_Mutli_Doload:" destination="EOp-rS-xLa" eventType="touchUpInside" id="2lp-m6-Zwy"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -77,9 +77,9 @@
                                     <constraint firstItem="4HC-mL-y3o" firstAttribute="top" secondItem="Mkl-5p-f29" secondAttribute="topMargin" id="LI4-0G-LLq"/>
                                     <constraint firstItem="QPq-Zb-2Tc" firstAttribute="height" secondItem="wPc-W2-yef" secondAttribute="height" id="N9M-2V-dMe"/>
                                     <constraint firstItem="4HC-mL-y3o" firstAttribute="width" secondItem="wPc-W2-yef" secondAttribute="width" id="WNg-Ij-bwq"/>
-                                    <constraint firstItem="4HC-mL-y3o" firstAttribute="centerX" secondItem="Mkl-5p-f29" secondAttribute="centerX" id="grT-hx-PmG"/>
-                                    <constraint firstItem="QPq-Zb-2Tc" firstAttribute="trailing" secondItem="Mkl-5p-f29" secondAttribute="trailingMargin" id="hFW-pL-CRr"/>
-                                    <constraint firstItem="QPq-Zb-2Tc" firstAttribute="width" secondItem="wPc-W2-yef" secondAttribute="width" id="mwC-hX-Kxx"/>
+                                    <constraint firstItem="4HC-mL-y3o" firstAttribute="centerX" secondItem="Mkl-5p-f29" secondAttribute="centerX" constant="-55" id="grT-hx-PmG"/>
+                                    <constraint firstItem="QPq-Zb-2Tc" firstAttribute="trailing" secondItem="Mkl-5p-f29" secondAttribute="trailingMargin" constant="-7" id="hFW-pL-CRr"/>
+                                    <constraint firstItem="QPq-Zb-2Tc" firstAttribute="width" secondItem="wPc-W2-yef" secondAttribute="width" constant="92" id="mwC-hX-Kxx"/>
                                     <constraint firstItem="4HC-mL-y3o" firstAttribute="height" secondItem="wPc-W2-yef" secondAttribute="height" id="xsJ-1F-h6y"/>
                                 </constraints>
                             </view>

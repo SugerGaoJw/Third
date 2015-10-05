@@ -9,6 +9,7 @@
 #import "SXHttpLoadManager.h"
 #import "SXPOSTRequest.h"
 #import "SXGETRequest.h"
+#import "SXMutliDoLoadRequest.h"
 
 
 @interface SXHttpLoadManager()
@@ -48,11 +49,11 @@ static SXHttpLoadManager* instance = nil;
 }
 
 #pragma mark -- Create
-
-- (__weak id<SXHttpLoadDelegate> )requestAtBody:(id<SXReqBodyDelegate>)reqBody
-        onFinishBlock:(SXHttpRequestFinishBlock)_finishBlock
-         onFiledBlock:(SXHttpRequestFailedBlock)_failedBlock {
-   
+- (__weak id<SXHttpLoadDelegate>)requestAtBody:(id<SXReqBodyDelegate>)reqBody
+                         onDoloadProgressBlock:(MutliDoloadingProgressBlock)_doloadProgressBlock
+                                 onFinishBlock:(SXHttpRequestFinishBlock)_finishBlock
+                                  onFiledBlock:(SXHttpRequestFailedBlock)_failedBlock {
+    
     if (reqBody == nil || _finishBlock == nil || _failedBlock == nil) {
         SLog(@"reqNetSeverAppend Error");
         return nil;
@@ -66,20 +67,40 @@ static SXHttpLoadManager* instance = nil;
     reqHandler.finishBlock = _finishBlock;
     reqHandler.failedBlock = _failedBlock;
     
+    //如果有 _doloadProgressBlock 则必须是 EN_REQUEST_MUTLI_DOWNLOAD | EN_REQUEST_MUTLI_UPLOAD 枚举
+    if (_doloadProgressBlock) {
+        NSAssert(enReqMethod != EN_REQUEST_MUTLI_DOWNLOAD
+                 || enReqMethod != EN_REQUEST_MUTLI_UPLOAD ,
+                  @"Current EN_REQUEST_METHOD is don't supported Doloading ProgressBlock ");
+        reqHandler.doloadProgressBlock = _doloadProgressBlock;
+    }
+    
     //放入请求字典内，以便管理
     [self addHttpLoadRequset:reqHandler];
     return reqHandler;
-
+    
 }
+- (__weak id<SXHttpLoadDelegate> )requestAtBody:(id<SXReqBodyDelegate>)reqBody
+                                  onFinishBlock:(SXHttpRequestFinishBlock)_finishBlock
+                                   onFiledBlock:(SXHttpRequestFailedBlock)_failedBlock {
+    
+    return [self requestAtBody:reqBody onDoloadProgressBlock:nil
+                 onFinishBlock:_finishBlock
+                  onFiledBlock:_failedBlock];
+}
+
 - (__weak id<SXHttpLoadDelegate>)pdtHttpRequestByEnum:(EN_REQUEST_METHOD)enReqMethod {
     SXHttpLoadHandler* httpLoadHander = nil;
     switch (enReqMethod) {
         case EN_REQUEST_POST:
             SLog(@"EN_REQUEST_POST");
             httpLoadHander = [[SXPOSTRequest alloc]init]; break;
-         case EN_REQUEST_GET:
+        case EN_REQUEST_GET:
             SLog(@"EN_REQUEST_GET");
             httpLoadHander = [[SXGETRequest alloc]init];break;
+            case EN_REQUEST_MUTLI_DOWNLOAD:
+            SLog(@"EN_REQUEST_MUTLI_DOWNLOAD");
+            httpLoadHander = [SXMutliDoLoadRequest alloc]; break;
         default:
             break;
     }
@@ -105,7 +126,8 @@ static SXHttpLoadManager* instance = nil;
                            @(ASIFileManagementError):@"亲手机本地文件出现问题，请稍后再试",
                            @(ASITooMuchRedirectionErrorType):@"亲网络不稳定，请稍后再试",
                            @(ASIUnhandledExceptionError):@"亲出现未知，请稍后再试",
-                           @(ASICompressionError):@"网络请求不稳定，请稍后再试"};
+                           @(ASICompressionError):@"网络请求不稳定，请稍后再试",
+                           @(ASIDoloadCompletedType):@"亲，下载完成"};
     }
     return _errDictionary;
 }
@@ -126,14 +148,14 @@ static SXHttpLoadManager* instance = nil;
 }
 
 - (BOOL)removeHttpLoadRequset:(id<SXHttpLoadDelegate>)sxHttpHandler {
-     NSString* key = [sxHttpHandler hashKey];
+    NSString* key = [sxHttpHandler hashKey];
     id<SXHttpLoadDelegate> obj = [self objectHttpLoadRequsetForKey:key];
     if (obj == nil) {
         return NO;
     }
-     SLog(@"remove：%@",sxHttpHandler);
+    SLog(@"remove：%@",sxHttpHandler);
     [self.dictionary removeObjectForKey:key];
-     SLog(@"current :%@",self.dictionary);
+    SLog(@"current :%@",self.dictionary);
     return YES;
 }
 

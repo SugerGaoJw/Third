@@ -13,7 +13,7 @@
 @protocol SXMutliStatusMachineDelegate <NSObject>
 - (void)callBakPreparedMutliStatus;
 - (void)callBakDoloadingMutliStatus;
-- (void)callBakPausedMutliStatus;
+- (void)callBakStopedMutliStatus;
 - (void)callBakFinishedMutliStatus;
 
 @end
@@ -35,9 +35,9 @@ typedef NS_ENUM(NSInteger , ENMutliDoloadStatus){
      */
     ENDoloadingStatus,
     /*!
-     *  暂停状态
+     *  停止状态
      */
-    ENPausedStatus,
+    ENStopedStatus,
     /*!
      *  完成状态
      */

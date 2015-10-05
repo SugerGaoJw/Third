@@ -99,5 +99,8 @@ typedef enum _ASICacheStoragePolicy {
 
 // Clear cached data stored for the passed storage policy
 - (void)clearCachedResponsesForStoragePolicy:(ASICacheStoragePolicy)cachePolicy;
-
+/*!
+ *  返回一个下载保存路径
+ */
+- (NSString *)pathToDoloadDestinationCachedForURL:(NSURL *)url;
 @end

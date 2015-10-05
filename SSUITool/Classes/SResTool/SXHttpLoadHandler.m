@@ -9,6 +9,8 @@
 #import "SXHttpLoadHandler.h"
 #if  !S_RELEASE_VERSRION //DEBUG
 #import "SXGETRequest.h"
+#import "SXMutliDoLoadRequest.h"
+
 #endif
 
 @interface SXHttpLoadHandler(){
@@ -39,6 +41,9 @@
 #if  !S_RELEASE_VERSRION //DEBUG
     if ([self isKindOfClass:[SXGETRequest class]]) {
         mainDomin = @"http://apis.baidu.com/apistore/movie/cinema";
+    }else if ([self isKindOfClass:[SXMutliDoLoadRequest class]]) {
+        mainDomin = @"http://allseeing-i.com/ASIHTTPRequest/tests/cached-redirect";
+//        mainDomin = @"http://allseeing-i.com/i/logo.png";
     }
 #endif
     
@@ -62,9 +67,8 @@
     
     BOOL empty1 = [NSObject isEqualSrcObject:(id)_respClassName EnqualClass:[NSString class]];
     BOOL empty2 = [NSObject isEqualSrcObject:(id)reqURL EnqualClass:[NSURL class]];
-    BOOL empty3 = [NSObject isEqualSrcObject:(id)reqBodyDic EnqualClass:[NSDictionary class]];
     
-    if (  !empty3 || !empty2 || !empty1) {
+    if (  !empty2 || !empty1) {
         SLog(@" empty3 || empty2 || empty1 check value is Failed");
         return ;
     }
@@ -89,18 +93,22 @@
     }
     
     //如果是 ASIHTTPRequest 对象 设置头部请求参数 headDic 并且启动对象
-    if ([_asiRquest isKindOfClass:[ASIHTTPRequest class]]) {
-        [self sxAppendRequset:_asiRquest HeandParams:headDic];
+    if ([NSObject isEqualSrcObject:(id)_asiRquest EnqualClass:[ASIHTTPRequest class]]) {
+       
+        ASIHTTPRequest* req = _asiRquest;
+        
+        //设置头部信息
+        [self sxAppendRequset:req HeandParams:headDic];
         //开始异部请求,设置超时时间 60.f ,设置缓存
-        [_asiRquest setTimeOutSeconds:60.f];
+        [req setTimeOutSeconds:60.f];
         
         //如果 cache 未设置，则设置 cache
-        if ([_asiRquest downloadCache] == nil) {
-            [_asiRquest setDownloadCache:[ASIDownloadCache sharedCache]];
-            [_asiRquest setCacheStoragePolicy:ASIAskServerIfModifiedCachePolicy];
+        if ([req downloadCache] == nil) {
+            [req setDownloadCache:[ASIDownloadCache sharedCache]];
+            [req setCachePolicy:ASIAskServerIfModifiedCachePolicy];
         }
         
-        [_asiRquest startAsynchronous];
+        [req startAsynchronous];
     }
    
 }
@@ -119,6 +127,7 @@
  *  强制取消请求对象
  */
 - (void)sxForceCancel {
+    
     if ([_asiRquest isMemberOfClass:[ASIHTTPRequest class]]) {
         ASIHTTPRequest* req = _asiRquest;
         [req clearDelegatesAndCancel];
@@ -156,6 +165,7 @@
   [headParams enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
       if (![key isKindOfClass:[NSString class]] || ![obj isKindOfClass:[NSString class]]) {
           *stop = YES;
+      
       }else{
           
           SLog(@"append head [key is %@ value is %@]", key ,obj);
@@ -216,6 +226,8 @@
     id respObject = nil;
     SXHttpLoadManager* manager = [SXHttpLoadManager shareInstance];
     
+    
+    
     //定义 失败处理block
     dispatch_block_t _failedHandlerBlock = ^(void) {
         isRespError = YES;
@@ -242,6 +254,12 @@
         }
 
     }
+    //如果断点续传
+    if ([self isKindOfClass:[SXMutliDoLoadRequest class]]) {
+        isRespError = NO;
+        description = [manager getErrDescriptionByKey:ASIDoloadCompletedType];
+    }
+    
     SLog(@"%@",[respObject keyValues]);
     if (_finishBlock) _finishBlock(isRespError,description,respObject);
     [self sxCleanResource];
@@ -277,7 +295,7 @@
     return nil;
 }
 
-- (id<NSCopying>)createMutliURL:(id<NSCopying>/* NSURL* */)urls BodyParams:(id<NSCopying>)bodyParams {
+/*- (id<NSCopying>)createMutliURL:(id<NSCopying>)urls BodyParams:(id<NSCopying>)bodyParams {
     return nil;
-}
+}*/
 @end

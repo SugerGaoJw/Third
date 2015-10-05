@@ -21,6 +21,8 @@
  */
 NSCopy SXHttpRequestFinishBlock finishBlock;
 NSCopy SXHttpRequestFailedBlock failedBlock;
+NSCopy MutliDoloadingProgressBlock doloadProgressBlock;
+
 NSCopy dispatch_block_t cleanMBPblock;
 NSCopy NSString* respClassName;
 //request POST
