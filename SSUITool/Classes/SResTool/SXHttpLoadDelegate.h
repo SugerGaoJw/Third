@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "SXRespBodyDelegate.h"
-#include "NSObject+Equal.h"
+#import "NSObject+Equal.h"
 
 
 /*!--------------------------------------------------------------------
@@ -71,8 +71,7 @@ typedef void(^gbl##__blockName)(dispatch_block_t hiddenMBPblock);          \
  *  @param resObject
  */
 typedef void(^SXHttpRequestFinishBlock)(BOOL isRespError,
-                                        NSString* errDescription,
-                                        id<SXRespBodyDelegate> resObject);
+                                        NSString* errDescription,id resObject);
 
 
 /*!--------------------------------------------------------------------
@@ -102,11 +101,12 @@ typedef BOOL(^MutliDoloadingProgressBlock)(CGFloat doloadPercentage,CGFloat tota
  *  --------------------------------------------------------------------
  */
 @protocol SXHttpLoadDelegate <NSObject,ASIHTTPRequestDelegate>
+@optional
 //key
 - (NSString *)hashKey;
 //init
 - (id<NSCopying>)createWithURL:(NSURL *)url BodyParams:(id<NSCopying>)bodyParams;
-//- (id<NSCopying>)createMutliURL:(id<NSCopying>/* NSURL* */)urls BodyParams:(id<NSCopying>)bodyParams;
+- (id<NSCopying>)createWithRequestHandlerArray:(NSArray * /*SXHttpLoadHandler*/)reqHandlers;
 
 //callback
 - (void)asiFetchFailed:(ASIHTTPRequest *)theRequest;

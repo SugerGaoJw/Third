@@ -14,9 +14,11 @@
 - (NSDictionary *)toBodyDictionary;
 - (NSDictionary *)toHeadDictionary;
 
+
+- ( NSString *)getReqURLMainDomin;
 - ( NSString *)getReqURLSuffix;
+- ( NSString *)getRespClassName;
 - ( NSInteger )getReqMethod;
 
-- ( NSString *)getRespClassName;
 - ( dispatch_block_t)getCleanMBPBlock;
 @end

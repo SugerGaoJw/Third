@@ -21,13 +21,15 @@
 }
 
 - (NSString *)getRespClassName{
-    return @"";
+    return nil;
 }
 
 - (NSString *)getReqURLSuffix {
-    return @"";
+    return nil;
 }
-
+- ( NSString *)getReqURLMainDomin {
+    return nil;
+}
 - (NSInteger)getReqMethod {
     //默认是POST 请求方法
     return 0;

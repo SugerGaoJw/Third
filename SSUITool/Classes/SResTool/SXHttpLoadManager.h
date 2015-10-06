@@ -7,9 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "SXHttpLoadDelegate.h"
 #import "SXReqBodyDelegate.h"
-
+#import "SXHttpLoadHandler.h"
 /*!
  * 网络请求管理类
  */
@@ -35,6 +34,13 @@ NSCopy NSString* mainReqURL;
 
 - (__weak id<SXHttpLoadDelegate>)requestAtBody:(id<SXReqBodyDelegate>)reqBody
                          onDoloadProgressBlock:(MutliDoloadingProgressBlock)_doloadProgressBlock
+                                 onFinishBlock:(SXHttpRequestFinishBlock)_finishBlock
+                                  onFiledBlock:(SXHttpRequestFailedBlock)_failedBlock;
+
+
+- (__weak id<SXHttpLoadDelegate>)requestAtBodyArray:(NSArray * /*id<SXReqBodyDelegate>*/)reqBodys
+                                  withCleanMBPBlock:(dispatch_block_t)_cleanMBPblock 
+                              onDoloadProgressBlock:(MutliDoloadingProgressBlock)_doloadProgressBlock
                                  onFinishBlock:(SXHttpRequestFinishBlock)_finishBlock
                                   onFiledBlock:(SXHttpRequestFailedBlock)_failedBlock;
 @end

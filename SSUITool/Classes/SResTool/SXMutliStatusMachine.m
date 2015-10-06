@@ -65,6 +65,7 @@
                 SLog(@"callBakStopedMutliStatus isn't implementation");
             }
         }
+            break;
         case ENFinishedStatus:{
             
             aSel = @selector(callBakFinishedMutliStatus);
@@ -75,8 +76,9 @@
             }
         }
             
-        default:
-            NSAssert(1, @"don's support %d ENUM", (int)enStatus);
+            break;
+            
+            case ENUNKownStatus:
             break;
     }
 }

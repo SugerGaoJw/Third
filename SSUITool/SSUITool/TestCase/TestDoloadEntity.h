@@ -1,5 +1,5 @@
 //
-//  TestSingleDoloadEntity.h
+//  TestDoloadEntity.h
 //  SSUITool
 //
 //  Created by suger on 15/10/5.
@@ -9,10 +9,12 @@
 #include "SXReqBaseBody.h"
 #include "SXRespBaseBody.h"
 
-@interface TestReqSingleDoloadEntity : SXReqBaseBody
+@interface TestReqDoloadEntity : SXReqBaseBody
+//配置请求地址
+NSCopy NSString* mainDominURL;
 
 @end
 
-@interface TestRespSingleDoloadEntity : SXRespBaseBody
+@interface TestRespDoloadEntity : SXRespBaseBody
 
 @end

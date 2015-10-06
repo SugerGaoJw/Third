@@ -49,7 +49,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4HC-mL-y3o">
-                                        <rect key="frame" x="62" y="8" width="46" height="30"/>
+                                        <rect key="frame" x="73" y="8" width="46" height="30"/>
                                         <animations/>
                                         <state key="normal" title="GET"/>
                                         <connections>
@@ -66,21 +66,50 @@
                                             <action selector="Single_Mutli_Doload:" destination="EOp-rS-xLa" eventType="touchUpInside" id="2lp-m6-Zwy"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4X1-BG-6B9">
+                                        <rect key="frame" x="8" y="71" width="89" height="30"/>
+                                        <animations/>
+                                        <state key="normal" title="Mutli-Doload"/>
+                                        <connections>
+                                            <action selector="MutliDoload:" destination="EOp-rS-xLa" eventType="touchUpInside" id="bhE-I2-XsH"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rIy-0W-WQA">
+                                        <rect key="frame" x="226" y="71" width="46" height="30"/>
+                                        <animations/>
+                                        <state key="normal" title="Button"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RWn-f4-kGh">
+                                        <rect key="frame" x="136" y="71" width="46" height="30"/>
+                                        <animations/>
+                                        <state key="normal" title="Button"/>
+                                    </button>
                                 </subviews>
                                 <animations/>
                                 <color key="backgroundColor" red="0.80000000000000004" green="1" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="4HC-mL-y3o" firstAttribute="baseline" secondItem="QPq-Zb-2Tc" secondAttribute="baseline" id="7uG-IT-lAZ"/>
-                                    <constraint firstItem="4HC-mL-y3o" firstAttribute="baseline" secondItem="wPc-W2-yef" secondAttribute="baseline" id="CO1-TP-f43"/>
+                                    <constraint firstItem="4HC-mL-y3o" firstAttribute="centerX" secondItem="Mkl-5p-f29" secondAttribute="centerX" constant="-44" id="0XC-CI-fk8"/>
+                                    <constraint firstItem="wPc-W2-yef" firstAttribute="leading" secondItem="Mkl-5p-f29" secondAttribute="leadingMargin" id="6WU-ED-IAZ"/>
+                                    <constraint firstItem="rIy-0W-WQA" firstAttribute="bottom" secondItem="Mkl-5p-f29" secondAttribute="bottomMargin" id="AQF-dZ-qQx"/>
+                                    <constraint firstItem="wPc-W2-yef" firstAttribute="leading" secondItem="4X1-BG-6B9" secondAttribute="leading" id="AZj-Qq-s8E"/>
+                                    <constraint firstItem="RWn-f4-kGh" firstAttribute="centerX" secondItem="Mkl-5p-f29" secondAttribute="centerX" constant="19" id="Bhb-Eg-30w"/>
                                     <constraint firstAttribute="height" constant="109" id="DQx-zl-OzK"/>
-                                    <constraint firstItem="wPc-W2-yef" firstAttribute="leading" secondItem="Mkl-5p-f29" secondAttribute="leadingMargin" id="Fc7-0S-2hd"/>
-                                    <constraint firstItem="4HC-mL-y3o" firstAttribute="top" secondItem="Mkl-5p-f29" secondAttribute="topMargin" id="LI4-0G-LLq"/>
-                                    <constraint firstItem="QPq-Zb-2Tc" firstAttribute="height" secondItem="wPc-W2-yef" secondAttribute="height" id="N9M-2V-dMe"/>
-                                    <constraint firstItem="4HC-mL-y3o" firstAttribute="width" secondItem="wPc-W2-yef" secondAttribute="width" id="WNg-Ij-bwq"/>
-                                    <constraint firstItem="4HC-mL-y3o" firstAttribute="centerX" secondItem="Mkl-5p-f29" secondAttribute="centerX" constant="-55" id="grT-hx-PmG"/>
-                                    <constraint firstItem="QPq-Zb-2Tc" firstAttribute="trailing" secondItem="Mkl-5p-f29" secondAttribute="trailingMargin" constant="-7" id="hFW-pL-CRr"/>
-                                    <constraint firstItem="QPq-Zb-2Tc" firstAttribute="width" secondItem="wPc-W2-yef" secondAttribute="width" constant="92" id="mwC-hX-Kxx"/>
-                                    <constraint firstItem="4HC-mL-y3o" firstAttribute="height" secondItem="wPc-W2-yef" secondAttribute="height" id="xsJ-1F-h6y"/>
+                                    <constraint firstItem="4HC-mL-y3o" firstAttribute="top" secondItem="Mkl-5p-f29" secondAttribute="topMargin" id="E2y-V8-cBh"/>
+                                    <constraint firstItem="QPq-Zb-2Tc" firstAttribute="top" secondItem="Mkl-5p-f29" secondAttribute="top" constant="8" id="F8f-cT-PbN"/>
+                                    <constraint firstItem="QPq-Zb-2Tc" firstAttribute="height" secondItem="wPc-W2-yef" secondAttribute="height" id="JvV-wy-zzd"/>
+                                    <constraint firstItem="RWn-f4-kGh" firstAttribute="baseline" secondItem="4X1-BG-6B9" secondAttribute="baseline" id="KV9-Um-ezc"/>
+                                    <constraint firstItem="QPq-Zb-2Tc" firstAttribute="width" secondItem="wPc-W2-yef" secondAttribute="width" constant="92" id="NZR-Bi-5uf"/>
+                                    <constraint firstItem="rIy-0W-WQA" firstAttribute="trailing" secondItem="Mkl-5p-f29" secondAttribute="trailingMargin" id="Pic-hy-6gw"/>
+                                    <constraint firstItem="rIy-0W-WQA" firstAttribute="baseline" secondItem="RWn-f4-kGh" secondAttribute="baseline" id="QyL-d1-Jxz"/>
+                                    <constraint firstItem="rIy-0W-WQA" firstAttribute="height" secondItem="wPc-W2-yef" secondAttribute="height" id="RX1-jf-3KL"/>
+                                    <constraint firstItem="4X1-BG-6B9" firstAttribute="width" secondItem="wPc-W2-yef" secondAttribute="width" constant="43" id="cGY-mH-izm"/>
+                                    <constraint firstItem="RWn-f4-kGh" firstAttribute="width" secondItem="wPc-W2-yef" secondAttribute="width" id="kkM-rI-ndC"/>
+                                    <constraint firstItem="4X1-BG-6B9" firstAttribute="height" secondItem="wPc-W2-yef" secondAttribute="height" id="lcq-Pf-Ann"/>
+                                    <constraint firstItem="4HC-mL-y3o" firstAttribute="width" secondItem="wPc-W2-yef" secondAttribute="width" id="qXc-JK-Rxl"/>
+                                    <constraint firstItem="RWn-f4-kGh" firstAttribute="height" secondItem="wPc-W2-yef" secondAttribute="height" id="rN3-jp-uHr"/>
+                                    <constraint firstAttribute="trailing" secondItem="QPq-Zb-2Tc" secondAttribute="trailing" constant="15" id="s09-jO-yaf"/>
+                                    <constraint firstItem="4HC-mL-y3o" firstAttribute="height" secondItem="wPc-W2-yef" secondAttribute="height" id="tbN-0K-4pZ"/>
+                                    <constraint firstItem="rIy-0W-WQA" firstAttribute="width" secondItem="wPc-W2-yef" secondAttribute="width" id="wLU-nF-9Dh"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -89,6 +118,7 @@
                         <constraints>
                             <constraint firstItem="Mkl-5p-f29" firstAttribute="centerX" secondItem="PKc-76-uGs" secondAttribute="centerX" id="SBk-0M-taF"/>
                             <constraint firstItem="Mkl-5p-f29" firstAttribute="top" secondItem="W9w-N8-inu" secondAttribute="bottom" constant="8" symbolic="YES" id="c4d-Dt-iz0"/>
+                            <constraint firstItem="wPc-W2-yef" firstAttribute="top" secondItem="W9w-N8-inu" secondAttribute="bottom" constant="16" id="e55-UM-0Y3"/>
                             <constraint firstItem="Mkl-5p-f29" firstAttribute="leading" secondItem="PKc-76-uGs" secondAttribute="leadingMargin" constant="4" id="huT-fG-VVL"/>
                         </constraints>
                     </view>

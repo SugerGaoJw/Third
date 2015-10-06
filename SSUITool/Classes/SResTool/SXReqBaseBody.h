@@ -21,6 +21,8 @@ NSStrong  session*   session;    //保存当前的session
 - (NSString * )getReqURLSuffix;
 //请求网络方法
 - (NSInteger)getReqMethod;
+//获取请求的URL
+- ( NSString *)getReqURLMainDomin;
 
 //请求完成后的清理 Hub 的block,使用get／set 方法替代属性，因若使用熟悉会造成toJson崩溃
 - (void)setOnCleanMBPBlock:(dispatch_block_t )onCleanMBPBlock;

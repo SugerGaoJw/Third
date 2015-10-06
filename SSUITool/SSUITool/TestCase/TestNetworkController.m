@@ -9,12 +9,13 @@
 #import "TestNetworkController.h"
 #import "TestNetAdrEntity.h"
 #import "TestNetMovieEntity.h"
-#import "TestSingleDoloadEntity.h"
+#import "TestDoloadEntity.h"
 
 
 gblHttpRequestHeader(RequestPOSTBlock)
 gblHttpRequestHeader(RequestGETBlock)
 gblHttpRequestHeader(SingleDoloadBlock)
+gblHttpRequestHeader(MutliDoloadBlock)
 
 @interface TestNetworkController ()
 @end
@@ -41,7 +42,7 @@ gblHttpRequestHeader(SingleDoloadBlock)
     
     //MBProgressHUD
     [MBProgressHUD showInViewNonAutoClean:KMBPSelfViewController
-                               forMessage:@"Request UserAddress..."
+                               forMessage:@"doPOSTReqAction..."
                        withHiddenHUDBlock:^(dispatch_block_t hBlock) {
                            
                            block(hBlock);
@@ -75,7 +76,7 @@ gblHttpRequestHeader(SingleDoloadBlock)
     
     //MBProgressHUD
     [MBProgressHUD showInViewNonAutoClean:KMBPSelfViewController
-                               forMessage:@"Request UserAddress..."
+                               forMessage:@"doGETReqAction..."
                        withHiddenHUDBlock:^(dispatch_block_t hBlock) {
                            
                            block(hBlock);
@@ -92,7 +93,7 @@ gblHttpRequestHeader(SingleDoloadBlock)
     //SXHttpLoadManager
     block = ^(dispatch_block_t hiddenMBPblock) {
         
-        TestReqSingleDoloadEntity* req = [[TestReqSingleDoloadEntity alloc]init];
+        TestReqDoloadEntity* req = [[TestReqDoloadEntity alloc]init];
         req.onCleanMBPBlock = hiddenMBPblock;
         
         SXHttpLoadManager* manager =  [SXHttpLoadManager shareInstance];
@@ -109,12 +110,58 @@ gblHttpRequestHeader(SingleDoloadBlock)
     
     //MBProgressHUD
     [MBProgressHUD showInViewNonAutoClean:KMBPSelfViewController
-                               forMessage:@"Request UserAddress..."
+                               forMessage:@"Single_Mutli_Doload..."
                        withHiddenHUDBlock:^(dispatch_block_t hBlock) {
                            
                            block(hBlock);
                            
                        }];
+}
+- (IBAction)MutliDoload:(id)sender {
+    
+    gblMutliDoloadBlock block;
+    //SXHttpLoadManager
+    block = ^(dispatch_block_t hiddenMBPblock) {
+        TestReqDoloadEntity* req = nil;
+        NSMutableArray* reqBodyArray = [[NSMutableArray alloc]init];
+        
+        req = [[TestReqDoloadEntity alloc]init];
+        req.mainDominURL = @"http://allseeing-i.com/ASIHTTPRequest/tests/images/small-image.jpg";
+        [reqBodyArray addObject:req];
+        
+        req = [[TestReqDoloadEntity alloc]init];
+        req.mainDominURL = @"http://allseeing-i.com/ASIHTTPRequest/tests/images/medium-image.jpg";
+        [reqBodyArray addObject:req];
+        
+        req = [[TestReqDoloadEntity alloc]init];
+        req.mainDominURL = @"http://allseeing-i.com/ASIHTTPRequest/tests/images/large-image.jpg";
+        [reqBodyArray addObject:req];
+        
+        SXHttpLoadManager* manager =  [SXHttpLoadManager shareInstance];
+        
+        [manager requestAtBodyArray:reqBodyArray withCleanMBPBlock:hiddenMBPblock
+              onDoloadProgressBlock:^BOOL(CGFloat doloadPercentage, CGFloat totalPercentage) {
+            
+            return NO;
+            
+        } onFinishBlock:^(BOOL isRespError, NSString *errDescription, SXHttpLoadHandler* resObject) {
+            
+        } onFiledBlock:^(BOOL isRespError, NSString *errDescription, id resObject) {
+            
+        }];
+    };
+    
+    //MBProgressHUD
+    [MBProgressHUD showInViewNonAutoClean:KMBPSelfViewController
+                               forMessage:@"Mutli_Doload..."
+                       withHiddenHUDBlock:^(dispatch_block_t hBlock) {
+                           
+                           block(hBlock);
+                           
+                       }];
+    
+    
+    
 }
 
 @end

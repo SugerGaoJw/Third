@@ -7,14 +7,15 @@
 //
 
 #import "SXHttpLoadHandler.h"
-#if  !S_RELEASE_VERSRION //DEBUG
+
+#import "SXPOSTRequest.h"
 #import "SXGETRequest.h"
 #import "SXMutliDoLoadRequest.h"
+#import "SXQueueRequest.h"
 
-#endif
 
 @interface SXHttpLoadHandler(){
-    __weak id _asiRquest;
+    __weak ASIHTTPRequest* _asiRquest;
     NSString* _hashKey;
 }
 - (void)sxfetchURL:(NSURL *)url
@@ -41,12 +42,16 @@
 #if  !S_RELEASE_VERSRION //DEBUG
     if ([self isKindOfClass:[SXGETRequest class]]) {
         mainDomin = @"http://apis.baidu.com/apistore/movie/cinema";
-    }else if ([self isKindOfClass:[SXMutliDoLoadRequest class]]) {
-        mainDomin = @"http://allseeing-i.com/ASIHTTPRequest/tests/cached-redirect";
-//        mainDomin = @"http://allseeing-i.com/i/logo.png";
     }
 #endif
-    
+    //因为下载地址是可变的。所以需要获取当前的配置地址
+    if ([self isKindOfClass:[SXMutliDoLoadRequest class]]) {
+        
+        mainDomin = [reqBody getReqURLMainDomin];
+        if (NO == [NSObject isEqualSrcObject:(id)mainDomin EnqualClass:[NSString class]]) {
+            NSAssert(0, @"doload path is invalid !");
+        }
+    }
     
     NSString* url = mainDomin;
     if ([reqBody getReqURLSuffix].length > 0) {
@@ -86,7 +91,7 @@
     
     //调用子类的 -createWithURL:BodyParams: 方法
     //传入只有 bodyDic 参数，headDic 参数在外面生成
-    _asiRquest = [self createWithURL:url BodyParams:bodyDic];
+    _asiRquest = (ASIHTTPRequest *)[self createWithURL:url BodyParams:bodyDic];
     if (_asiRquest == nil) {
         SLog(@"_asiHttpRequestObject is nil ");
         [self sxCleanResource];
@@ -113,14 +118,6 @@
    
 }
 
-- (void)sxSetHttpLoadRequests:(NSArray *)reqArray {
-    
-    _asiRquest = [self createWithURL:nil BodyParams:reqArray];
-    if (_asiRquest == nil) {
-        [self sxCleanResource];
-    }
-    
-}
 /*!
  *  @author Suger G, 15-09-27 13:09:38
  *
@@ -133,11 +130,11 @@
         [req clearDelegatesAndCancel];
         
     }else if ([_asiRquest isKindOfClass:[ASINetworkQueue class]]) {
-        ASINetworkQueue* queue = _asiRquest;
+        ASINetworkQueue* queue = (ASINetworkQueue *)_asiRquest;
         [queue reset];
         
     }else{
-        NSAssert(1 , @"_asiHttpRequestObject isn't ASIHTTPRequest or ASINetworkQueue");
+        NSAssert(0 , @"_asiHttpRequestObject isn't ASIHTTPRequest or ASINetworkQueue");
     }
 }
 /*!
@@ -156,6 +153,7 @@
     }
     [[SXHttpLoadManager shareInstance]removeHttpLoadRequset:self];
 }
+
 
 
 #pragma mark - NSObject Help
@@ -197,7 +195,7 @@
 }
 
 /**
- *  网络请求失败之行
+ *  网络请求失败执行
  */
 - (void)asiFetchFailed:(ASIHTTPRequest *)theRequest{
     
@@ -255,12 +253,19 @@
 
     }
     //如果断点续传
-    if ([self isKindOfClass:[SXMutliDoLoadRequest class]]) {
+    if ([self isKindOfClass:[SXMutliDoLoadRequest class]]
+        || [self isKindOfClass:[SXQueueRequest class]]) {
+        
         isRespError = NO;
         description = [manager getErrDescriptionByKey:ASIDoloadCompletedType];
+        respObject = theRequest;
+    
+    }else{
+        
+        SLog(@"%@",[respObject keyValues]);
     }
     
-    SLog(@"%@",[respObject keyValues]);
+    
     if (_finishBlock) _finishBlock(isRespError,description,respObject);
     [self sxCleanResource];
 }
@@ -290,12 +295,32 @@
     return urlSuffix;
     
 }
+
++ (SXHttpLoadHandler *)pdtHttpRequestByEnum:(EN_REQUEST_METHOD)enReqMethod {
+    SXHttpLoadHandler* httpLoadHander = nil;
+    switch (enReqMethod) {
+        case EN_REQUEST_POST:
+            SLog(@"EN_REQUEST_POST");
+            httpLoadHander = [[SXPOSTRequest alloc]init]; break;
+        case EN_REQUEST_GET:
+            SLog(@"EN_REQUEST_GET");
+            httpLoadHander = [[SXGETRequest alloc]init];break;
+        case EN_REQUEST_MUTLI_DOWNLOAD:
+            SLog(@"EN_REQUEST_MUTLI_DOWNLOAD");
+            httpLoadHander = [SXMutliDoLoadRequest alloc]; break;
+        default:
+            break;
+    }
+    return httpLoadHander;
+}
+
 #pragma mark - SubObject Override
 - (id<NSCopying>)createWithURL:(NSURL *)url BodyParams:(id<NSCopying>)bodyParams {
     return nil;
 }
 
-/*- (id<NSCopying>)createMutliURL:(id<NSCopying>)urls BodyParams:(id<NSCopying>)bodyParams {
+- (id<NSCopying>)createWithRequestHandlerArray:(NSArray *)reqHandlers {
     return nil;
-}*/
+}
+@synthesize asiRquest = _asiRquest;
 @end

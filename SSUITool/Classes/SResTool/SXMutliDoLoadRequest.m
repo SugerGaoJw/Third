@@ -15,6 +15,7 @@
     SXMutliStatusMachine* _machine;
 }
 - (void)_initProperty;
+- (void)_prepareSetDownloadPath:(NSString *)aPath;
 @end
 
 
@@ -68,10 +69,16 @@
     
     //设置下载地址
     NSString *path = [cache pathToDoloadCachedForURL:url IsTemporaryPath:NO];
-    if (path != nil) [req setDownloadDestinationPath:path];
+    if (path != nil){
+        [self _prepareSetDownloadPath:path];
+        [req setDownloadDestinationPath:path];
+    };
     
-     path = [cache pathToDoloadCachedForURL:url IsTemporaryPath:YES];
-     if (path != nil) [req setTemporaryFileDownloadPath:path];
+//     path = [cache pathToDoloadCachedForURL:url IsTemporaryPath:YES];
+//    if (path != nil) {
+//        [self _prepareSetDownloadPath:path];
+//        [req setTemporaryFileDownloadPath:path];
+//    };
     
     //设置machine 状态
     [_machine stlMachineForStatus:ENPreparedStatus];
@@ -91,10 +98,9 @@
 - (void)request:(ASIHTTPRequest *)request willRedirectToURL:(NSURL *)newURL {
     [request clearDelegatesAndCancel];
     
-    
      //重新实例 ASIHTTPRequest 对象
     ASIHTTPRequest* newReq = (ASIHTTPRequest *)[self createWithURL:newURL BodyParams:nil];
-    [newReq setTimeOutSeconds:60];
+    [newReq setTimeOutSeconds:60.f];
     [newReq startAsynchronous];
    
 
@@ -106,8 +112,8 @@
     SLog(@"Content-Length-%f",_totalDoloadPercentage);
     //获取文件
 //    Content-Disposition
-    NSString* fileName = [responseHeaders valueForKey:@"Content-Disposition"];
-    SLog(@"Content-Disposition-%@",fileName);
+//    NSString* fileName = [responseHeaders valueForKey:@"Content-Disposition"];
+//    SLog(@"Content-Disposition-%@",fileName);
 }
 
 - (void)asiFetchFailed:(ASIHTTPRequest *)theRequest {
@@ -138,7 +144,15 @@
         }
     }
 }
-
+- (void)_prepareSetDownloadPath:(NSString *)aPath {
+    
+    NSFileManager* fileMgr = [NSFileManager defaultManager];
+    BOOL bRet = [fileMgr fileExistsAtPath:aPath];
+    if (bRet) {
+        NSError *err;
+        [fileMgr removeItemAtPath:aPath error:&err];
+    }
+}
 #pragma mark - SXMutliStatusMachineDelegate
 - (void)callBakPreparedMutliStatus {
     

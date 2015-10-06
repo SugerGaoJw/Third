@@ -10,7 +10,6 @@
 #import "SXHttpLoadDelegate.h"
 #import "SXReqBodyDelegate.h"
 #import "SXRespBodyDelegate.h"
-
 #import "SXHttpLoadManager.h"
 
 
@@ -25,18 +24,21 @@ NSCopy MutliDoloadingProgressBlock doloadProgressBlock;
 
 NSCopy dispatch_block_t cleanMBPblock;
 NSCopy NSString* respClassName;
+//获取请求对象句柄
+NSWeakReadonly ASIHTTPRequest* asiRquest;
+
+//init
++ (SXHttpLoadHandler *)pdtHttpRequestByEnum:(EN_REQUEST_METHOD)enReqMethod;
+
 //request POST
 - (void)sxReqBody:(id<SXReqBodyDelegate>)reqBody;
 
-//queue
-- (void)sxSetHttpLoadRequests:(NSArray * /*SXPOSTRequest Object */)reqArray;
 //clean
 - (void)sxForceCancel;
 - (void)sxCleanResource;
 
 //利用 runtime 生成对象
 - (instancetype)initWithClassName:(NSString *)className;
-
 /*!
  *  通过 dictionary 对象生成 URL 后缀
  *  @return URL 后缀

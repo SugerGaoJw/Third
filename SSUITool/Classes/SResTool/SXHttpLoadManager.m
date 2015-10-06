@@ -7,15 +7,18 @@
 //
 
 #import "SXHttpLoadManager.h"
-#import "SXPOSTRequest.h"
-#import "SXGETRequest.h"
-#import "SXMutliDoLoadRequest.h"
-
+#import "SXQueueRequest.h"
+#import "SXReqBaseBody.h"
 
 @interface SXHttpLoadManager()
 NSStrong NSMutableDictionary* dictionary;
 
-- (__weak id<SXHttpLoadDelegate>)pdtHttpRequestByEnum:(EN_REQUEST_METHOD)enReqMethod;
+NSStrong ASINetworkQueue* networkQueue;
+
+- (__weak SXHttpLoadHandler *)pdtRequestWithBody:(id<SXReqBodyDelegate>)reqBody
+                           onDoloadProgressBlock:(MutliDoloadingProgressBlock)_doloadProgressBlock
+                                   onFinishBlock:(SXHttpRequestFinishBlock)_finishBlock
+                                    onFiledBlock:(SXHttpRequestFailedBlock)_failedBlock;
 + (void)cfgASIRequestResourceCache;
 @end
 
@@ -38,8 +41,6 @@ static SXHttpLoadManager* instance = nil;
     return _dictionary;
 }
 
-
-#pragma mark -- Url
 - (NSString *)mainReqURL {
     /*!
      *  eg.url 请求地址切换
@@ -48,7 +49,40 @@ static SXHttpLoadManager* instance = nil;
     return _mainReqURL;
 }
 
+- ( ASINetworkQueue *)networkQueue {
+    
+    if (_networkQueue == nil) {
+        _networkQueue = [[ASINetworkQueue alloc]init];
+        [_networkQueue setMaxConcurrentOperationCount:5];
+    }
+    return _networkQueue;
+}
+
 #pragma mark -- Create
+- (__weak SXHttpLoadHandler *)pdtRequestWithBody:(id<SXReqBodyDelegate>)reqBody
+                           onDoloadProgressBlock:(MutliDoloadingProgressBlock)_doloadProgressBlock
+                                   onFinishBlock:(SXHttpRequestFinishBlock)_finishBlock
+                                    onFiledBlock:(SXHttpRequestFailedBlock)_failedBlock {
+    //根据 EN_REQUEST_METHOD 请求方法实例相对应的请求实体类
+    EN_REQUEST_METHOD enReqMethod = [reqBody getReqMethod];
+    SXHttpLoadHandler* reqHandler = [SXHttpLoadHandler pdtHttpRequestByEnum:enReqMethod];
+    
+    //配置请求实例对象的属性
+    [reqHandler sxReqBody:reqBody];
+    reqHandler.finishBlock = _finishBlock;
+    reqHandler.failedBlock = _failedBlock;
+    
+    //如果有 _doloadProgressBlock 则必须是 EN_REQUEST_MUTLI_DOWNLOAD | EN_REQUEST_MUTLI_UPLOAD 枚举
+    if (_doloadProgressBlock) {
+        NSAssert(enReqMethod == EN_REQUEST_MUTLI_DOWNLOAD
+                 || enReqMethod  == EN_REQUEST_MUTLI_UPLOAD ,
+                 @"Current EN_REQUEST_METHOD is don't supported Doloading ProgressBlock ");
+        reqHandler.doloadProgressBlock = _doloadProgressBlock;
+    }
+    
+    return reqHandler;
+}
+
 - (__weak id<SXHttpLoadDelegate>)requestAtBody:(id<SXReqBodyDelegate>)reqBody
                          onDoloadProgressBlock:(MutliDoloadingProgressBlock)_doloadProgressBlock
                                  onFinishBlock:(SXHttpRequestFinishBlock)_finishBlock
@@ -58,23 +92,11 @@ static SXHttpLoadManager* instance = nil;
         SLog(@"reqNetSeverAppend Error");
         return nil;
     }
-    //根据 EN_REQUEST_METHOD 请求方法实例相对应的请求实体类
-    EN_REQUEST_METHOD enReqMethod = [reqBody getReqMethod];
-    SXHttpLoadHandler* reqHandler = (SXHttpLoadHandler *)[self pdtHttpRequestByEnum:enReqMethod];
-    
-    //配置请求实例对象的属性
-    [reqHandler sxReqBody:reqBody];
-    reqHandler.finishBlock = _finishBlock;
-    reqHandler.failedBlock = _failedBlock;
-    
-    //如果有 _doloadProgressBlock 则必须是 EN_REQUEST_MUTLI_DOWNLOAD | EN_REQUEST_MUTLI_UPLOAD 枚举
-    if (_doloadProgressBlock) {
-        NSAssert(enReqMethod != EN_REQUEST_MUTLI_DOWNLOAD
-                 || enReqMethod != EN_REQUEST_MUTLI_UPLOAD ,
-                  @"Current EN_REQUEST_METHOD is don't supported Doloading ProgressBlock ");
-        reqHandler.doloadProgressBlock = _doloadProgressBlock;
-    }
-    
+    //根据配置request body 生成 SXHttpLoadHandler 对象
+    SXHttpLoadHandler* reqHandler = [self pdtRequestWithBody:reqBody
+                                       onDoloadProgressBlock:_doloadProgressBlock
+                                               onFinishBlock:_finishBlock
+                                                onFiledBlock:_failedBlock];
     //放入请求字典内，以便管理
     [self addHttpLoadRequset:reqHandler];
     return reqHandler;
@@ -89,23 +111,65 @@ static SXHttpLoadManager* instance = nil;
                   onFiledBlock:_failedBlock];
 }
 
-- (__weak id<SXHttpLoadDelegate>)pdtHttpRequestByEnum:(EN_REQUEST_METHOD)enReqMethod {
-    SXHttpLoadHandler* httpLoadHander = nil;
-    switch (enReqMethod) {
-        case EN_REQUEST_POST:
-            SLog(@"EN_REQUEST_POST");
-            httpLoadHander = [[SXPOSTRequest alloc]init]; break;
-        case EN_REQUEST_GET:
-            SLog(@"EN_REQUEST_GET");
-            httpLoadHander = [[SXGETRequest alloc]init];break;
-            case EN_REQUEST_MUTLI_DOWNLOAD:
-            SLog(@"EN_REQUEST_MUTLI_DOWNLOAD");
-            httpLoadHander = [SXMutliDoLoadRequest alloc]; break;
-        default:
-            break;
+- (__weak id<SXHttpLoadDelegate>)requestAtBodyArray:(NSArray * /*SXReqBaseBody */)reqBodys
+                                  withCleanMBPBlock:(dispatch_block_t)_cleanMBPblock 
+                              onDoloadProgressBlock:(MutliDoloadingProgressBlock)_doloadProgressBlock
+                                      onFinishBlock:(SXHttpRequestFinishBlock)_finishBlock
+                                       onFiledBlock:(SXHttpRequestFailedBlock)_failedBlock {
+    
+    gblWselfHeader;
+    __block BOOL valid = YES;
+    __block SXHttpLoadHandler* reqHandler = nil;
+    
+    
+     NSMutableArray* _reqHandlerArray =  [[NSMutableArray alloc]init];
+    
+    [reqBodys enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        
+        //判断当前的传入参数
+        if (NO == [NSObject isEqualSrcObject:obj EnqualClass:[SXReqBaseBody class]]) {
+            
+            *stop = YES;valid = NO; SLog(@"for SXReqBaseBody is falid") return ;
+      
+        }else{
+            //根据 SXReqBaseBody 对象生成 SXHttpLoadHandler
+            reqHandler = [wself pdtRequestWithBody:obj onDoloadProgressBlock:nil
+                                     onFinishBlock:nil onFiledBlock:nil];
+            
+            if (reqHandler == nil) {
+                
+                *stop = YES; valid = NO;SLog(@"for SXHttpLoadHandler is falid");
+            
+            }else{
+                //拷贝进度回调block
+                reqHandler.doloadProgressBlock = _doloadProgressBlock;
+                [_reqHandlerArray addObject:reqHandler];
+            }
+        }
+    }];
+    
+    if (_reqHandlerArray.count <= 0 || valid == NO ) {
+        SLog(@"requestAtBodyArray is falid");
+        return nil;
     }
-    return httpLoadHander;
+    
+    SXQueueRequest* queueHandler = [[SXQueueRequest alloc]init];
+   id rlsObject =  [queueHandler createWithRequestHandlerArray:_reqHandlerArray];
+    if (rlsObject == nil) {
+        SLog(@"createWithRequestHandlerArray is falid");
+        return nil;
+    }
+    
+    queueHandler.finishBlock = _finishBlock;
+    queueHandler.failedBlock = _failedBlock;
+    queueHandler.cleanMBPblock = _cleanMBPblock;
+    
+    //放入请求字典内，以便管理
+    [self addHttpLoadRequset:queueHandler];
+    return reqHandler;
+    
 }
+
 
 #pragma mark -- Response
 
