@@ -18,9 +18,24 @@ gblHttpRequestHeader(SingleDoloadBlock)
 gblHttpRequestHeader(MutliDoloadBlock)
 
 @interface TestNetworkController ()
+- (void)asyTextNode;
 @end
 
 @implementation TestNetworkController
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self asyTextNode];
+}
+#pragma mark - AsyncDisplayKit
+- (void)asyTextNode {
+    
+   ASImageNode* _imageNode =  [[ASImageNode alloc] init];
+//    _imageNode.backgroundColor = [UIColor lightGrayColor];
+    _imageNode.image = [UIImage imageNamed:@"logo-square"];
+    _imageNode.frame = (CGRect){20,200,CGSizeMake(50, 50)};// CGRectMake(10.0f, 10.0f, 40.0f, 40.0f);
+    [self.view addSubview:_imageNode.view];
+}
+
 
 #pragma mark - POST NetRequest TEST
 - (IBAction)doPOSTReqAction:(id)sender {
