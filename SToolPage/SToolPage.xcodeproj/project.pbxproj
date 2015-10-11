@@ -162,6 +162,7 @@
 		9BD274121BA57A780052F186 /* MRZoomControllerScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BD2740E1BA57A780052F186 /* MRZoomControllerScrollView.m */; };
 		9BD274131BA57A780052F186 /* MRZoomScrollView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BD2740F1BA57A780052F186 /* MRZoomScrollView.h */; };
 		9BD274141BA57A780052F186 /* MRZoomScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BD274101BA57A780052F186 /* MRZoomScrollView.m */; };
+		9BE0770D1BC9E94100328083 /* AsyncDisplayKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BE0770C1BC9E94100328083 /* AsyncDisplayKit.framework */; settings = {ASSET_TAGS = (); }; };
 		CD4D1D441B929B6100F78A80 /* SToolPage.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = CD4D1D431B929B6100F78A80 /* SToolPage.h */; };
 		CD4D1D461B929B6100F78A80 /* SToolPage.m in Sources */ = {isa = PBXBuildFile; fileRef = CD4D1D451B929B6100F78A80 /* SToolPage.m */; };
 		CD4D1D4C1B929B6200F78A80 /* libSToolPage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD4D1D401B929B6100F78A80 /* libSToolPage.a */; };
@@ -445,6 +446,7 @@
 		9BD2740E1BA57A780052F186 /* MRZoomControllerScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRZoomControllerScrollView.m; sourceTree = "<group>"; };
 		9BD2740F1BA57A780052F186 /* MRZoomScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRZoomScrollView.h; sourceTree = "<group>"; };
 		9BD274101BA57A780052F186 /* MRZoomScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRZoomScrollView.m; sourceTree = "<group>"; };
+		9BE0770C1BC9E94100328083 /* AsyncDisplayKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AsyncDisplayKit.framework; sourceTree = "<group>"; };
 		CD4D1D401B929B6100F78A80 /* libSToolPage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSToolPage.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD4D1D431B929B6100F78A80 /* SToolPage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SToolPage.h; sourceTree = "<group>"; };
 		CD4D1D451B929B6100F78A80 /* SToolPage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SToolPage.m; sourceTree = "<group>"; };
@@ -573,6 +575,7 @@
 				CD4D1D5F1B929BDD00F78A80 /* MobileCoreServices.framework in Frameworks */,
 				CD4D1D5D1B929BD600F78A80 /* SystemConfiguration.framework in Frameworks */,
 				CD4D1D5B1B929BCD00F78A80 /* UIKit.framework in Frameworks */,
+				9BE0770D1BC9E94100328083 /* AsyncDisplayKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -816,6 +819,7 @@
 		CD4D1D421B929B6100F78A80 /* SToolPage */ = {
 			isa = PBXGroup;
 			children = (
+				9BE0770C1BC9E94100328083 /* AsyncDisplayKit.framework */,
 				9BD24B201BA5B5F7002C219F /* SDWebImage */,
 				9BD2740C1BA57A780052F186 /* MRZoomScrollView */,
 				CDB7322A1B93F90E00ADBC06 /* ASIJSON */,
@@ -1211,7 +1215,7 @@
 		CD4D1D381B929B6100F78A80 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0640;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = NewLandPay;
 				TargetAttributes = {
 					CD4D1D3F1B929B6100F78A80 = {
@@ -1467,6 +1471,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1530,6 +1535,10 @@
 			buildSettings = {
 				DEAD_CODE_STRIPPING = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/SToolPage",
+				);
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
@@ -1545,6 +1554,10 @@
 			buildSettings = {
 				DEAD_CODE_STRIPPING = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/SToolPage",
+				);
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
@@ -1569,6 +1582,7 @@
 				);
 				INFOPLIST_FILE = SToolPageTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.newland.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -1583,6 +1597,7 @@
 				);
 				INFOPLIST_FILE = SToolPageTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.newland.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
