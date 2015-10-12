@@ -9,6 +9,10 @@
 #import "AppDelegate.h"
 
 @interface AppDelegate (Resource)
+
 - (void)loadAppResource;
 - (void)loadAppServerAddress;
+
+- (void)closeSDWImageDecompressd;
+
 @end

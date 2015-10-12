@@ -22,6 +22,9 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		9BC1FC981BCA7B3E00C1D89C /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BC1FC971BCA7B3E00C1D89C /* Accelerate.framework */; };
+		9BC1FC9D1BCA7C9000C1D89C /* UIImage+ImageEffects.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BC1FC9B1BCA7C9000C1D89C /* UIImage+ImageEffects.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9BC1FC9E1BCA7C9000C1D89C /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BC1FC9C1BCA7C9000C1D89C /* UIImage+ImageEffects.m */; settings = {ASSET_TAGS = (); }; };
 		9BD24BAD1BA5B5F7002C219F /* alpha.c in Sources */ = {isa = PBXBuildFile; fileRef = 9BD24B231BA5B5F7002C219F /* alpha.c */; };
 		9BD24BAE1BA5B5F7002C219F /* alphai.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BD24B241BA5B5F7002C219F /* alphai.h */; };
 		9BD24BAF1BA5B5F7002C219F /* buffer.c in Sources */ = {isa = PBXBuildFile; fileRef = 9BD24B251BA5B5F7002C219F /* buffer.c */; };
@@ -305,6 +308,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		9BC1FC971BCA7B3E00C1D89C /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		9BC1FC9B1BCA7C9000C1D89C /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
+		9BC1FC9C1BCA7C9000C1D89C /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		9BD24B231BA5B5F7002C219F /* alpha.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = alpha.c; sourceTree = "<group>"; };
 		9BD24B241BA5B5F7002C219F /* alphai.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = alphai.h; sourceTree = "<group>"; };
 		9BD24B251BA5B5F7002C219F /* buffer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = buffer.c; sourceTree = "<group>"; };
@@ -565,6 +571,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9BC1FC981BCA7B3E00C1D89C /* Accelerate.framework in Frameworks */,
 				9BD24C361BA5BFA3002C219F /* AVKit.framework in Frameworks */,
 				9BD24C341BA5BF94002C219F /* ImageIO.framework in Frameworks */,
 				CD4D1D651B929BF000F78A80 /* Foundation.framework in Frameworks */,
@@ -587,6 +594,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9BC1FC991BCA7C9000C1D89C /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				9BC1FC9A1BCA7C9000C1D89C /* UImage */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		9BC1FC9A1BCA7C9000C1D89C /* UImage */ = {
+			isa = PBXGroup;
+			children = (
+				9BC1FC9B1BCA7C9000C1D89C /* UIImage+ImageEffects.h */,
+				9BC1FC9C1BCA7C9000C1D89C /* UIImage+ImageEffects.m */,
+			);
+			path = UImage;
+			sourceTree = "<group>";
+		};
 		9BD24B201BA5B5F7002C219F /* SDWebImage */ = {
 			isa = PBXGroup;
 			children = (
@@ -790,6 +814,7 @@
 		CD4D1D371B929B6100F78A80 = {
 			isa = PBXGroup;
 			children = (
+				9BC1FC971BCA7B3E00C1D89C /* Accelerate.framework */,
 				9BD24C351BA5BFA3002C219F /* AVKit.framework */,
 				9BD24C331BA5BF94002C219F /* ImageIO.framework */,
 				CD4D1D641B929BF000F78A80 /* Foundation.framework */,
@@ -816,6 +841,7 @@
 		CD4D1D421B929B6100F78A80 /* SToolPage */ = {
 			isa = PBXGroup;
 			children = (
+				9BC1FC991BCA7C9000C1D89C /* Category */,
 				9BD24B201BA5B5F7002C219F /* SDWebImage */,
 				9BD2740C1BA57A780052F186 /* MRZoomScrollView */,
 				CDB7322A1B93F90E00ADBC06 /* ASIJSON */,
@@ -1115,6 +1141,7 @@
 				9BD24BFC1BA5B5F7002C219F /* huffman.h in Headers */,
 				9BD24BE21BA5B5F7002C219F /* histogram.h in Headers */,
 				9BD24BEF1BA5B5F7002C219F /* vp8li.h in Headers */,
+				9BC1FC9D1BCA7C9000C1D89C /* UIImage+ImageEffects.h in Headers */,
 				CD4D1DBF1B929FCA00F78A80 /* MJExtensionConst.h in Headers */,
 				9BD24BDE1BA5B5F7002C219F /* cost.h in Headers */,
 				CDB65FA41B92A1F80072D4C4 /* MJRefreshStateHeader.h in Headers */,
@@ -1382,6 +1409,7 @@
 				9BD24BBE1BA5B5F7002C219F /* cpu.c in Sources */,
 				9BD24BC51BA5B5F7002C219F /* enc.c in Sources */,
 				CDB65F951B92A1F80072D4C4 /* MJRefreshAutoGifFooter.m in Sources */,
+				9BC1FC9E1BCA7C9000C1D89C /* UIImage+ImageEffects.m in Sources */,
 				9BD24BB21BA5B5F7002C219F /* idec.c in Sources */,
 				9BD24C301BA5B5F7002C219F /* UIImageView+WebCache.m in Sources */,
 				9BD24BC61BA5B5F7002C219F /* enc_avx2.c in Sources */,

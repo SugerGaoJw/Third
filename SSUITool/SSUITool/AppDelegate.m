@@ -25,6 +25,7 @@
    //laod App Resource
     [self loadAppResource];
     [self loadAppServerAddress];
+    [self closeSDWImageDecompressd];
     
     //main window
     UINavigationController* nav = [SXibLoadHandler shareInstance].gxlMainNavigationController;

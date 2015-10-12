@@ -12,6 +12,7 @@
 		9B86BD751BBBF80D008D22DD /* SToolPage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B86BD741BBBF80D008D22DD /* SToolPage.framework */; settings = {ASSET_TAGS = (); }; };
 		9B86BD781BBC050C008D22DD /* SXGETRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B86BD771BBC050C008D22DD /* SXGETRequest.m */; settings = {ASSET_TAGS = (); }; };
 		9BA809301BBD207100037E3C /* TestNetMovieEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA8092F1BBD207100037E3C /* TestNetMovieEntity.m */; settings = {ASSET_TAGS = (); }; };
+		9BC1FC961BCA77AD00C1D89C /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BC1FC951BCA77AD00C1D89C /* Accelerate.framework */; };
 		9BCB68811BC9FAD4002973C1 /* AsyncDisplayKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BCB68801BC9FAD4002973C1 /* AsyncDisplayKit.framework */; settings = {ASSET_TAGS = (); }; };
 		9BCB688C1BCA05B0002973C1 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BCB688B1BCA05B0002973C1 /* AssetsLibrary.framework */; };
 		9BCB688E1BCA05E0002973C1 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BCB688D1BCA05E0002973C1 /* Photos.framework */; };
@@ -63,6 +64,7 @@
 		9B86BD771BBC050C008D22DD /* SXGETRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SXGETRequest.m; sourceTree = "<group>"; };
 		9BA8092E1BBD207100037E3C /* TestNetMovieEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestNetMovieEntity.h; sourceTree = "<group>"; };
 		9BA8092F1BBD207100037E3C /* TestNetMovieEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestNetMovieEntity.m; sourceTree = "<group>"; };
+		9BC1FC951BCA77AD00C1D89C /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		9BCB68801BC9FAD4002973C1 /* AsyncDisplayKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AsyncDisplayKit.framework; path = ../../../../Desktop/AsyncDisplayKit.framework; sourceTree = "<group>"; };
 		9BCB688B1BCA05B0002973C1 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		9BCB688D1BCA05E0002973C1 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
@@ -150,6 +152,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9BC1FC961BCA77AD00C1D89C /* Accelerate.framework in Frameworks */,
 				9BCB688E1BCA05E0002973C1 /* Photos.framework in Frameworks */,
 				9BCB688C1BCA05B0002973C1 /* AssetsLibrary.framework in Frameworks */,
 				9BDDCAA61BBBA46700B37262 /* libz.tbd in Frameworks */,
@@ -188,6 +191,7 @@
 		CD14F71B1B908D75007BF19A = {
 			isa = PBXGroup;
 			children = (
+				9BC1FC951BCA77AD00C1D89C /* Accelerate.framework */,
 				9BCB688D1BCA05E0002973C1 /* Photos.framework */,
 				9BCB688B1BCA05B0002973C1 /* AssetsLibrary.framework */,
 				9BCB68801BC9FAD4002973C1 /* AsyncDisplayKit.framework */,

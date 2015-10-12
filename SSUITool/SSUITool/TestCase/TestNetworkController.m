@@ -10,6 +10,7 @@
 #import "TestNetAdrEntity.h"
 #import "TestNetMovieEntity.h"
 #import "TestDoloadEntity.h"
+#import <SToolPage/UIImage+ImageEffects.h>
 
 
 gblHttpRequestHeader(RequestPOSTBlock)
@@ -30,10 +31,16 @@ gblHttpRequestHeader(MutliDoloadBlock)
 - (void)asyTextNode {
     
    ASImageNode* _imageNode =  [[ASImageNode alloc] init];
-//    _imageNode.backgroundColor = [UIColor lightGrayColor];
     _imageNode.image = [UIImage imageNamed:@"logo-square"];
     _imageNode.frame = (CGRect){20,200,CGSizeMake(50, 50)};// CGRectMake(10.0f, 10.0f, 40.0f, 40.0f);
     [self.view addSubview:_imageNode.view];
+    
+    _imageNode.imageModificationBlock = ^UIImage *(UIImage* image) {
+       return [image applyBlurWithRadius:30.f tintColor:blurredWhite saturationDeltaFactor:1.8 maskImage:nil];
+    };
+    
+   
+
 }
 
 

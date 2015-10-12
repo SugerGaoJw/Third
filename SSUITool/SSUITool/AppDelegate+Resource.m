@@ -22,7 +22,17 @@
     [[SXHttpLoadManager shareInstance]setMainReqURL:SERVER_URL];
 }
 
-
+- (void)closeSDWImageDecompressd {
+    
+//    关于SDWebImage中的decodedimagewithimage引发的内存 量消耗的解决办法
+    SDImageCache* cahce = [SDImageCache sharedImageCache];
+    [cahce setShouldDecompressImages:NO];
+    [cahce setMaxMemoryCountLimit:30]; // 30MB
+    
+   SDWebImageDownloader* loader =  [SDWebImageDownloader sharedDownloader];
+    [loader setShouldDecompressImages:NO];
+    [loader setMaxConcurrentDownloads:5];
+}
 - (NSBundle *)bundleHandler {
     return [NSBundle mainBundle];
 }
