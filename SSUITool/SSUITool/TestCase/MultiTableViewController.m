@@ -11,8 +11,10 @@
 
 
 
-@interface MultiTableViewController ()
-
+@interface MultiTableViewController (){
+    NSArray* _requestTempArray;
+    __block NSString* _currentPage;
+}
 @end
 
 @implementation MultiTableViewController
@@ -20,9 +22,9 @@
 - (void)viewDidLoad {
     
     self.enTableViewType = ENTableViewInTabType;
-    self.enRefreshType = ENRefreshAllType;
     
     [super viewDidLoad];
+    _currentPage = @"0";
 }
 
 #pragma mark - Table view data source
@@ -31,23 +33,50 @@
 
 #pragma mark - STableViewDelegate
 - (void)stableView:(UITableView *)tableView didRefreshedFooter:(MJRefreshFooter *)refreshFooter {
-    /* dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-     [refreshFooter endRefreshing];
-     });*/
     
-}
-
-- (void)stableView:(UITableView *)tableView didRefreshedHeader:(MJRefreshHeader *)refreshHeader {
+    NSString* _tryPage = [NSString stringWithFormat:@"%d",([_currentPage intValue] + 1)];
    
+    //handler respond data
     dispatch_block_t endRefreshedBlock = ^(void) {
-        [refreshHeader endRefreshing];
+        [refreshFooter endRefreshing];
+        if ([NSObject isEqualSrcObject:_requestTempArray EnqualClass:[NSArray class]]) {
+            [self.tableSourceArray addObjectsFromArray:_requestTempArray];
+            _currentPage = _tryPage;
+            [self.tableView reloadData];
+        }
         
     };
     
     //config Request entity
     DoubanTop250ReqEntity* req = [[DoubanTop250ReqEntity alloc]init];
     req.onCleanMBPBlock = endRefreshedBlock;
-    req.start = @"0";
+    req.start = _tryPage;
+    
+    //start http request
+    [self requestHttpBody:req];
+}
+
+- (void)stableView:(UITableView *)tableView didRefreshedHeader:(MJRefreshHeader *)refreshHeader {
+   
+    //config Request entity
+    _currentPage = @"0";
+    
+    //handler respond data
+    dispatch_block_t endRefreshedBlock = ^(void) {
+        [refreshHeader endRefreshing];
+        if ([NSObject isEqualSrcObject:_requestTempArray EnqualClass:[NSArray class]]) {
+            [self.tableSourceArray removeAllObjects];
+            [self.tableSourceArray addObjectsFromArray:_requestTempArray];
+            [self.tableView reloadData];
+        }
+        
+    };
+    
+    
+   
+    DoubanTop250ReqEntity* req = [[DoubanTop250ReqEntity alloc]init];
+    req.onCleanMBPBlock = endRefreshedBlock;
+    req.start = _currentPage;
     
     //start http request
     [self requestHttpBody:req];
@@ -55,9 +84,20 @@
 
 - (void)requestHttpBody:(id<SXReqBodyDelegate>)reqBody {
     
+    //clean
+    _requestTempArray = nil;
+    
     //start http loader
     SXHttpLoadManager* manager = [SXHttpLoadManager shareInstance];
     [manager requestAtBody:reqBody  onFinishBlock:^(BOOL isRespError, NSString *errDescription, id resObject) {
+        
+        //判断赋值
+        if (!isRespError
+            & [NSObject isEqualSrcObject:resObject EnqualClass:[DoubanTop250RespEntity class]]) {
+            DoubanTop250RespEntity* resp = (DoubanTop250RespEntity *)resObject;
+            _requestTempArray = resp.top250_list.copy;
+            resp = nil;
+        }
         
     } onFiledBlock:^(BOOL isRespError, NSString *errDescription, id resObject) {
         

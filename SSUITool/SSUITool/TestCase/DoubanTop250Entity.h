@@ -38,16 +38,17 @@ NSCopy NSString* year;
 NSCopy NSString* name;
 NSCopy NSString* movieId;
 NSCopy NSString* original_title;
-
-NSStrong CoverImages* coverImages;
-NSStrong MovieRating* movieRating;
+NSStrong NSArray* movieClassification; //电影分类
+NSStrong CoverImages* coverImages; //电影封面
+NSStrong MovieRating* movieRating; //电影评分
 @end
 
 /*!
  *   豆瓣Top250返回类
  */
 @interface DoubanTop250RespEntity : SXRespBaseBody
-NSCopy NSArray*  top250_list;
+NSStrong NSArray*  top250_list;
+
 NSCopy NSString* title;
 NSCopy NSString* count;
 NSCopy NSString* start;

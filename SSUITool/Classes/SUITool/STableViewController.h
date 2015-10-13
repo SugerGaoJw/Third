@@ -19,7 +19,7 @@
 
 @property (nonatomic, weak   ) id<STableViewDelegate> sdelegate;
 @property (nonatomic, assign ) CGFloat tableCellHeight;
-
+@property (nonatomic, strong ) NSMutableArray* tableSourceArray;
 @property (nonatomic, assign )            ENTableViewType     enTableViewType;        //tableView类型
 @property (nonatomic, assign )            ENRefreshType       enRefreshType;         //添加刷新控件的类型
 @property (nonatomic, assign, readonly )  ENRefreshStateType  enRefreshStateType;    //当前刷新控件状态

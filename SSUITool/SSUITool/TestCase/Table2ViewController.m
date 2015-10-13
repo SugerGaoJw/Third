@@ -13,16 +13,25 @@
     self.enTableViewType = ENTableViewInControllerType;
     [super viewDidLoad];
     [self setTitle:@"TableListInViewcontroller"];
+    [self.tableSourceArray addObject:@""];
+    [self.tableSourceArray addObject:@""];
+    [self.tableSourceArray addObject:@""];
+    [self.tableSourceArray addObject:@""];
+    [self.tableSourceArray addObject:@""];
+    [self.tableSourceArray addObject:@""];
+    [self.tableSourceArray addObject:@""];
+    [self.tableSourceArray addObject:@""];
+    [self.tableSourceArray addObject:@""];
+    [self.tableSourceArray addObject:@""];
+    [self.tableSourceArray addObject:@""];
+    [self.tableSourceArray addObject:@""];
+    [self.tableSourceArray addObject:@""];
+    
 }
 
 
 #pragma mark - Table view data source
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // Return the number of rows in the section.
-    
-    return 11;
-}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:KTableCellIdentifier forIndexPath:indexPath];

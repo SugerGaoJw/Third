@@ -16,16 +16,10 @@
     [self.tabBarController.navigationItem setTitle:@"TableListInTab"];
 }
 - (void)viewDidLoad {
-//    self.enRefreshType = ENRefreshOnlyHeaderType;
+    self.enRefreshType = ENRefreshNoneType;
     self.enTableViewType = ENTableViewInTabType;
     [super viewDidLoad];
 
-    /*
-    TestReqAdrEntity* req = [TestReqAdrEntity new];
-    req.a = @"list";
-    
-    NSDictionary* reqDic = [req toDictionary];
-    SLog(@"%@",reqDic);*/
     
    NSString* jsonStr = @"{\"loginJson\":{\"message\":\"用户名或密码错误!\",\"pass\":false,\"loginName\":null}}";
    id jsonObject  =  [jsonStr JSONObject];

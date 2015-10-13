@@ -7,8 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#define KMultiTableIdentifier @"MultiTableIdentifier"
+#import "DoubanTop250Entity.h"
+#import "STabelViewCell.h"
 
-@interface MultiTableViewCell : UITableViewCell
+@interface MultiTableViewCell : STabelViewCell {
 
+   __weak CALayer* _placeholderLayer;
+    CGSize featureImageSizeOptional;
+}
+- (void)setMovieEnity:(MovieEntity *)movieEntity;
 @end

@@ -41,7 +41,8 @@
     [MovieEntity setupReplacedKeyFromPropertyName:^NSDictionary *{
         return @{@"coverImages": @"images",
                  @"movieRating": @"rating",
-                 @"movieId":@"id"};
+                 @"movieId":@"id",
+                 @"movieClassification":@"genres"};
     }];
     
     [DoubanTop250RespEntity setupObjectClassInArray:^NSDictionary *{

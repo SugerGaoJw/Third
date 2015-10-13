@@ -42,7 +42,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return 0;
+    return self.tableSourceArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -201,6 +201,12 @@
     }
 }
 
+-(NSMutableArray *)tableSourceArray {
+    if (_tableSourceArray == nil) {
+        _tableSourceArray = [[NSMutableArray alloc]init];
+    }
+    return _tableSourceArray;
+}
 /**
  #pragma mark -- App Life Notification
  //DidEnterBackgroundNotification
