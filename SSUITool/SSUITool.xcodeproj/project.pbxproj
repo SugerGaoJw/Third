@@ -19,6 +19,9 @@
 		9BDDCAA41BBBA45A00B37262 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BDDCAA31BBBA45A00B37262 /* libxml2.tbd */; };
 		9BDDCAA61BBBA46700B37262 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BDDCAA51BBBA46700B37262 /* libz.tbd */; };
 		9BE0B3F61BC2197700A8C8FA /* TestDoloadEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE0B3F51BC2197700A8C8FA /* TestDoloadEntity.m */; settings = {ASSET_TAGS = (); }; };
+		9BE63CE21BCCDE3A0016E547 /* MultiTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE63CE11BCCDE3A0016E547 /* MultiTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
+		9BE63CE51BCCDF010016E547 /* MultiTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE63CE41BCCDF010016E547 /* MultiTableViewController.m */; settings = {ASSET_TAGS = (); }; };
+		9BE63CEA1BCCEAB20016E547 /* DoubanTop250Entity.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE63CE91BCCEAB20016E547 /* DoubanTop250Entity.m */; settings = {ASSET_TAGS = (); }; };
 		9BE69A951BC0A10F00ADDB8C /* SXMutliStatusMachine.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE69A941BC0A10F00ADDB8C /* SXMutliStatusMachine.m */; settings = {ASSET_TAGS = (); }; };
 		9BE8DE3E1BC27B8700F0BD04 /* SXQueueRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE8DE3D1BC27B8700F0BD04 /* SXQueueRequest.m */; settings = {ASSET_TAGS = (); }; };
 		CD14F72A1B908D75007BF19A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CD14F7291B908D75007BF19A /* main.m */; };
@@ -72,6 +75,12 @@
 		9BDDCAA51BBBA46700B37262 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		9BE0B3F41BC2197700A8C8FA /* TestDoloadEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestDoloadEntity.h; sourceTree = "<group>"; };
 		9BE0B3F51BC2197700A8C8FA /* TestDoloadEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestDoloadEntity.m; sourceTree = "<group>"; };
+		9BE63CE01BCCDE3A0016E547 /* MultiTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiTableViewCell.h; sourceTree = "<group>"; };
+		9BE63CE11BCCDE3A0016E547 /* MultiTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiTableViewCell.m; sourceTree = "<group>"; };
+		9BE63CE31BCCDF010016E547 /* MultiTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiTableViewController.h; sourceTree = "<group>"; };
+		9BE63CE41BCCDF010016E547 /* MultiTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiTableViewController.m; sourceTree = "<group>"; };
+		9BE63CE81BCCEAB20016E547 /* DoubanTop250Entity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoubanTop250Entity.h; sourceTree = "<group>"; };
+		9BE63CE91BCCEAB20016E547 /* DoubanTop250Entity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoubanTop250Entity.m; sourceTree = "<group>"; };
 		9BE69A931BC0A10F00ADDB8C /* SXMutliStatusMachine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SXMutliStatusMachine.h; sourceTree = "<group>"; };
 		9BE69A941BC0A10F00ADDB8C /* SXMutliStatusMachine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SXMutliStatusMachine.m; sourceTree = "<group>"; };
 		9BE8DE3C1BC27B8700F0BD04 /* SXQueueRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SXQueueRequest.h; sourceTree = "<group>"; };
@@ -168,6 +177,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9BE63CDF1BCCDE010016E547 /* MultiTableView */ = {
+			isa = PBXGroup;
+			children = (
+				9BE63CE01BCCDE3A0016E547 /* MultiTableViewCell.h */,
+				9BE63CE11BCCDE3A0016E547 /* MultiTableViewCell.m */,
+				9BE63CE31BCCDF010016E547 /* MultiTableViewController.h */,
+				9BE63CE41BCCDF010016E547 /* MultiTableViewController.m */,
+				9BE63CE81BCCEAB20016E547 /* DoubanTop250Entity.h */,
+				9BE63CE91BCCEAB20016E547 /* DoubanTop250Entity.m */,
+			);
+			name = MultiTableView;
+			sourceTree = "<group>";
+		};
 		9BE69A901BC0A0A600ADDB8C /* MutilDoload */ = {
 			isa = PBXGroup;
 			children = (
@@ -285,6 +307,7 @@
 		CD14F79A1B90900E007BF19A /* TestCase */ = {
 			isa = PBXGroup;
 			children = (
+				9BE63CDF1BCCDE010016E547 /* MultiTableView */,
 				9BE0B3F41BC2197700A8C8FA /* TestDoloadEntity.h */,
 				9BE0B3F51BC2197700A8C8FA /* TestDoloadEntity.m */,
 				CD14F79E1B9098E4007BF19A /* Table2ViewController.h */,
@@ -503,7 +526,9 @@
 				CDF6D83B1B92AB87009E44DD /* SXPOSTRequest.m in Sources */,
 				CDF6D8481B92B260009E44DD /* SXHttpLoadManager.m in Sources */,
 				9BA809301BBD207100037E3C /* TestNetMovieEntity.m in Sources */,
+				9BE63CE51BCCDF010016E547 /* MultiTableViewController.m in Sources */,
 				CDB732381B947B0000ADBC06 /* SBaseViewController.m in Sources */,
+				9BE63CEA1BCCEAB20016E547 /* DoubanTop250Entity.m in Sources */,
 				9BE69A951BC0A10F00ADDB8C /* SXMutliStatusMachine.m in Sources */,
 				CD14F7A31B909A48007BF19A /* TestTableCell.m in Sources */,
 				CD14F7971B908F0A007BF19A /* STabelViewCell.m in Sources */,
@@ -525,6 +550,7 @@
 				CD14F72A1B908D75007BF19A /* main.m in Sources */,
 				CDF6D8441B92ABF7009E44DD /* SXHttpLoadUploadImage.m in Sources */,
 				CDF6D84B1B931331009E44DD /* TestNetworkController.m in Sources */,
+				9BE63CE21BCCDE3A0016E547 /* MultiTableViewCell.m in Sources */,
 				CD354FAC1B9140DB0046D263 /* UIViewController+Swizzling.m in Sources */,
 				9BE0B3F61BC2197700A8C8FA /* TestDoloadEntity.m in Sources */,
 			);

@@ -31,7 +31,9 @@
 - (NSString *)rn {
     return @"15";
 }
-
+- (NSString *)getReqURLMainDomin {
+    return @"http://apis.baidu.com/apistore/movie/cinema";
+}
 - (NSString *)getRespClassName {
     return NSStringFromClass([TestRespMovieEntity class]);
 }

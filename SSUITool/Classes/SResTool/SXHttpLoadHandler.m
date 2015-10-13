@@ -41,7 +41,7 @@
 
 #if  !S_RELEASE_VERSRION //DEBUG
     if ([self isKindOfClass:[SXGETRequest class]]) {
-        mainDomin = @"http://apis.baidu.com/apistore/movie/cinema";
+        mainDomin = [reqBody getReqURLMainDomin];
     }
 #endif
     //因为下载地址是可变的。所以需要获取当前的配置地址

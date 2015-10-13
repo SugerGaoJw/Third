@@ -36,11 +36,9 @@ gblHttpRequestHeader(MutliDoloadBlock)
     [self.view addSubview:_imageNode.view];
     
     _imageNode.imageModificationBlock = ^UIImage *(UIImage* image) {
+        UIColor* blurredWhite = [UIColor colorWithWhite:.8 alpha:.4f];
        return [image applyBlurWithRadius:30.f tintColor:blurredWhite saturationDeltaFactor:1.8 maskImage:nil];
     };
-    
-   
-
 }
 
 
