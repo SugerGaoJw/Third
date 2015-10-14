@@ -35,14 +35,14 @@
 - (void)stableView:(UITableView *)tableView didRefreshedFooter:(MJRefreshFooter *)refreshFooter {
     
     NSString* _tryPage = [NSString stringWithFormat:@"%d",([_currentPage intValue] + 1)];
-   
     //handler respond data
+    __weak typeof(self) wself = self;
     dispatch_block_t endRefreshedBlock = ^(void) {
         [refreshFooter endRefreshing];
         if ([NSObject isEqualSrcObject:_requestTempArray EnqualClass:[NSArray class]]) {
-            [self.tableSourceArray addObjectsFromArray:_requestTempArray];
+            [wself.tableSourceArray addObjectsFromArray:_requestTempArray];
             _currentPage = _tryPage;
-            [self.tableView reloadData];
+            [wself.tableView reloadData];
         }
         
     };
@@ -62,12 +62,13 @@
     _currentPage = @"0";
     
     //handler respond data
+    __weak typeof(self) wself = self;
     dispatch_block_t endRefreshedBlock = ^(void) {
         [refreshHeader endRefreshing];
         if ([NSObject isEqualSrcObject:_requestTempArray EnqualClass:[NSArray class]]) {
-            [self.tableSourceArray removeAllObjects];
-            [self.tableSourceArray addObjectsFromArray:_requestTempArray];
-            [self.tableView reloadData];
+            [wself.tableSourceArray removeAllObjects];
+            [wself.tableSourceArray addObjectsFromArray:_requestTempArray];
+            [wself.tableView reloadData];
         }
         
     };

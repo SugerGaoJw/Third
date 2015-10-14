@@ -22,6 +22,7 @@
 #import "ASIJSONTool.h"
 #import "MRZoomControllerScrollView.h"
 #import "UIImageView+WebCache.h"
+#import "Masonry.h"
 
 
 @interface SToolPage : NSObject
